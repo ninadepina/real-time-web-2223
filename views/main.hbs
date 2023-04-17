@@ -12,7 +12,11 @@
 		{{! <link rel='icon' type='image/x-icon' href='/static/uploads/favicon.ico' /> }}
 		<link rel='preload stylesheet' href='/styles/style.css' as='style' type='text/css' />
 		<script src='/socket.io/socket.io.js' defer></script>
-		<script src="/scripts/socket.js" defer></script>
+		{{!-- <script src='/scripts/socket.js' defer></script> --}}
+
+		{{#each js}}
+			<script src='/scripts/{{this}}.js' type='module'></script>
+		{{/each}}
 	</head>
 	<body>
 		<main>

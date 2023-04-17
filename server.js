@@ -39,14 +39,34 @@ routes.forEach((route) => {
 });
 
 //socket.io
+// io.on('connect', (socket) => {
+// 	console.log('a user connected');
+
+// 	socket.on('message', (message) => {
+// 		io.emit('message', message);
+// 	});
+
+// 	socket.on('disconnect', () => {
+// 		console.log('user disconnected');
+// 	});
+// });
+
 io.on('connect', (socket) => {
 	console.log('a user connected');
 
+	socket.on('username', (username) => {
+		socket.data.username = username;
+		io.emit('userJoined', `${username} joined the chat`);
+	});
+
 	socket.on('message', (message) => {
-		io.emit('message', message);
+		const username = socket.data.username;
+		io.emit('message', `${username}: ${message}`);
 	});
 
 	socket.on('disconnect', () => {
+		const username = socket.data.username;
+		io.emit('userLeft', `${username} left the chat`);
 		console.log('user disconnected');
 	});
 });
