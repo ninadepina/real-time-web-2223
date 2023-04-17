@@ -14,5 +14,5 @@ form.addEventListener('submit', (e) => {
 
 socket.on('message', (msg) => {
 	messages.appendChild(Object.assign(document.createElement('li'), { textContent: msg }));
-	messages.scrollTop = messages.scrollHeight;
+	// messages.scrollTop = messages.scrollHeight;
 });

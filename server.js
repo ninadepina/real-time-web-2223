@@ -39,7 +39,7 @@ routes.forEach((route) => {
 });
 
 //socket.io
-io.on('connection', (socket) => {
+io.on('connect', (socket) => {
 	console.log('a user connected');
 
 	socket.on('message', (message) => {
