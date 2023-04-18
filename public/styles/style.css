@@ -87,10 +87,25 @@ button {
 	color: var(--text-placeholder-color);
 }
 .username_area button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 2.775rem;
 	height: 2.775rem;
-	color: var(--text-color);
 	background-color: var(--accent-color);
-	border: none;
+	border: 2px solid transparent;
 	border-radius: var(--border-radius-chat);
+	transition: background-color 150ms ease-in-out, border 150ms ease-in-out;
+}
+.username_area button:hover {
+	background-color: transparent;
+	border: 2px solid var(--text-color);
+}
+.username_area button svg {
+	width: calc(40% + 4px);
+	height: calc(40% + 4px);
+	fill: none;
+}
+.username_area button svg path {
+	fill: var(--text-color);
 }
