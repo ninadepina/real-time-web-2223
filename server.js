@@ -6,6 +6,7 @@ import routes from './routes/routes.js';
 import session from 'express-session';
 import compression from 'compression';
 import dotenv from 'dotenv';
+import { route } from './routes/routes.js';
 dotenv.config();
 
 const app = express();
@@ -31,6 +32,10 @@ app.use(
 		resave: false
 	})
 );
+
+// routes
+app.use('/', route);
+
 app.engine(
 	'hbs',
 	engine({
@@ -43,11 +48,6 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 app.set('views', './views');
-
-// routes
-routes.forEach((route) => {
-	app.use(route.path, route.view);
-});
 
 //socket.io
 // io.on('connect', (socket) => {
