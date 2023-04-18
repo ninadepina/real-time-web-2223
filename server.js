@@ -19,8 +19,6 @@ const http = createServer(app);
 import { Server } from 'socket.io';
 const io = new Server(http);
 
-const sessionLength = 1000 * 60 * 60 * 24 * 7; // 1 day
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());
@@ -28,9 +26,8 @@ app.use(compression());
 app.use(
 	session({
 		name: 'chatsession',
-		secret: 'chatsecretsessiondata',
+		secret: process.env.SESSION_SECRET,
 		saveUninitialized: true,
-		cookie: { maxAge: sessionLength },
 		resave: false
 	})
 );
