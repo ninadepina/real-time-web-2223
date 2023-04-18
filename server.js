@@ -7,6 +7,7 @@ import compression from 'compression';
 import dotenv from 'dotenv';
 import { route } from './routes/routes.js';
 import chatSocket from './sockets.js';
+import ws from 'ws';
 
 dotenv.config();
 
@@ -62,6 +63,11 @@ io.use((socket, next) => {
 
 	socket.username = username;
 	next();
+});
+
+io.engine.ws = new ws.Server({
+	noServer: true,
+	clientTracking: false
 });
 
 const port = process.env.PORT || 3000;
