@@ -11,8 +11,16 @@
 		<title>RW ninadepina</title>
 		{{! <link rel='icon' type='image/x-icon' href='/static/uploads/favicon.ico' /> }}
 		<link rel='preload stylesheet' href='/styles/style.css' as='style' type='text/css' />
+
+		<link rel='preconnect' href='https://fonts.googleapis.com' />
+		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+		<link
+			href='https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap'
+			rel='stylesheet'
+		/>
+
 		<script src='/socket.io/socket.io.js' defer></script>
-		{{!-- <script src='/scripts/socket.js' defer></script> --}}
+		{{! <script src='/scripts/socket.js' defer></script> }}
 
 		{{#each js}}
 			<script src='/scripts/{{this}}.js' type='module'></script>
