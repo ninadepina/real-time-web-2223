@@ -1,3 +1,5 @@
+@import url(./chat.css);
+
 *,
 *::after,
 *::before {
@@ -11,11 +13,84 @@
 	padding: 0;
 
 	font-family: inherit;
+	font-weight: var(--font-weight);
 	line-height: inherit;
 	color: inherit;
 }
 
+:root {
+	--text-color: #eaeaea;
 
+	--bg-color: #1b1a1d;
+	--chat-bg-color: #2a2d2e;
+
+	--text-placeholder-color: #96999c;
+	--chat-input-color: var(--bg-color);
+
+	--chat-bubble-color-other: var(--bg-color);
+	--chat-bubble-color-own: #3e3f41;
+
+	--accent-color: #3d8dfd;
+	--accent-color-2: #d9513f;
+
+	--font-family: 'Source Sans Pro', sans-serif;
+	--font-weight: 300;
+
+	--border-radius: 0.875rem;
+	--border-radius-chat: 0.525rem;
+}
+
+body {
+	min-height: 100vh;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--bg-color);
+}
 ul {
-    list-style: none;
+	list-style: none;
+}
+button {
+	cursor: pointer;
+}
+
+.username {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.username_area {
+	width: 30vw;
+	padding: 0.75rem;
+	background-color: var(--chat-bg-color);
+	border-radius: var(--border-radius);
+}
+
+.username_area form {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.425rem;
+	background-color: var(--chat-input-color);
+	border-radius: var(--border-radius-chat);
+}
+.username_area form input {
+	flex-grow: 1;
+	min-height: 2.775rem;
+	padding-left: 0.725rem;
+	color: var(--text-color);
+	background-color: transparent;
+	border: none;
+}
+.username_area form input::placeholder {
+	color: var(--text-placeholder-color);
+}
+.username_area button {
+	width: 2.775rem;
+	height: 2.775rem;
+	color: var(--text-color);
+	background-color: var(--accent-color);
+	border: none;
+	border-radius: var(--border-radius-chat);
 }
