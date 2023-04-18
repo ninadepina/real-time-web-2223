@@ -2,12 +2,16 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
-import routes from './routes/routes.js';
 import session from 'express-session';
 import compression from 'compression';
 import dotenv from 'dotenv';
 import { route } from './routes/routes.js';
+import chatSocket from './sockets.js';
+
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 import { createServer } from 'http';
@@ -15,8 +19,6 @@ const http = createServer(app);
 import { Server } from 'socket.io';
 const io = new Server(http);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const sessionLength = 1000 * 60 * 60 * 24 * 7; // 1 day
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,36 +52,19 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 
 //socket.io
-// io.on('connect', (socket) => {
-// 	console.log('a user connected');
+io.on('connection', (socket) => {
+	chatSocket(io, socket);
+});
 
-// 	socket.on('message', (message) => {
-// 		io.emit('message', message);
-// 	});
+io.use((socket, next) => {
+	const username = socket.handshake.auth.username;
 
-// 	socket.on('disconnect', () => {
-// 		console.log('user disconnected');
-// 	});
-// });
+	if (!username) {
+		return next(new Error('invalid username'));
+	}
 
-io.on('connect', (socket) => {
-	console.log('a user connected');
-
-	socket.on('username', (username) => {
-		socket.data.username = username;
-		io.emit('userJoined', `${username} joined the chat`);
-	});
-
-	socket.on('message', (message) => {
-		const username = socket.data.username;
-		io.emit('message', `${username}: ${message}`);
-	});
-
-	socket.on('disconnect', () => {
-		const username = socket.data.username;
-		io.emit('userLeft', `${username} left the chat`);
-		console.log('user disconnected');
-	});
+	socket.username = username;
+	next();
 });
 
 const port = process.env.PORT || 3000;
