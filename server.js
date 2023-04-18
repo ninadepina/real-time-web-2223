@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
 import routes from './routes/routes.js';
+import session from 'express-session';
 import compression from 'compression';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -15,11 +16,21 @@ const io = new Server(http);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const sessionLength = 1000 * 60 * 60 * 24 * 7; // 1 day
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());
 
+app.use(
+	session({
+		name: 'chatsession',
+		secret: 'chatsecretsessiondata',
+		saveUninitialized: true,
+		cookie: { maxAge: sessionLength },
+		resave: false
+	})
+);
 app.engine(
 	'hbs',
 	engine({
