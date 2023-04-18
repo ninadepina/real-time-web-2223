@@ -20,7 +20,7 @@ fetch('/username')
 	});
 
 socket.on('new_user', (new_user_msg) => {
-	messages.appendChild(Object.assign(document.createElement('li'), { textContent: new_user_msg }));
+	messages.appendChild(Object.assign(document.createElement('li'), { textContent: new_user_msg, classList: 'server' }));
 });
 
 form.addEventListener('submit', (e) => {
@@ -40,7 +40,7 @@ socket.on('message', (obj) => {
 });
 
 socket.on('left_user', (left_user_msg) => {
-	messages.appendChild(Object.assign(document.createElement('li'), { textContent: left_user_msg }));
+	messages.appendChild(Object.assign(document.createElement('li'), { textContent: left_user_msg, classList: 'server' }));
 });
 
 export { currentUser };
