@@ -46,6 +46,9 @@ body {
 	color: var(--text-color);
 	background-color: var(--bg-color);
 }
+main {
+	height: 100%;
+}
 ul {
 	list-style: none;
 }
