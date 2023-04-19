@@ -1,5 +1,5 @@
 import socket from './socket.js';
-import { onMessage } from './message.js';
+import { onMessage, onJoin, onLeave } from './messages.js';
 
 const messages = document.querySelector('.messages');
 const form = document.querySelector('.chat_form');
@@ -20,9 +20,7 @@ fetch('/username')
 	});
 
 socket.on('new_user', (new_user_msg) => {
-	messages.appendChild(
-		Object.assign(document.createElement('li'), { textContent: new_user_msg, classList: 'server' })
-	);
+	onJoin(new_user_msg);
 });
 
 form.addEventListener('submit', (e) => {
@@ -42,9 +40,7 @@ socket.on('message', (obj) => {
 });
 
 socket.on('left_user', (left_user_msg) => {
-	messages.appendChild(
-		Object.assign(document.createElement('li'), { textContent: left_user_msg, classList: 'server' })
-	);
+	onLeave(left_user_msg);
 });
 
 export { currentUser };

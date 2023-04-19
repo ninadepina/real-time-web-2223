@@ -25,3 +25,13 @@ export function onMessage(obj, currentUser) {
 	appendChild(messages, li);
 	window.scrollTo(0, document.body.scrollHeight);
 }
+
+export function onJoin(new_user_msg) {
+	const li = createElement('li', { textContent: new_user_msg, classList: 'server' });
+	appendChild(messages, li);
+}
+
+export function onLeave(left_user_msg) {
+	const li = createElement('li', { textContent: left_user_msg, classList: 'server' });
+	appendChild(messages, li);
+}
