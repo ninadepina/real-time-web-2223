@@ -1,7 +1,6 @@
 import socket from './socket.js';
 import { onMessage, onJoin, onLeave } from './messages.js';
 
-const messages = document.querySelector('.messages');
 const form = document.querySelector('.chat_form');
 const input = document.querySelector('.chat_input');
 

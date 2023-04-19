@@ -15,4 +15,4 @@ const timeData = () => {
 	return data;
 };
 
-export default timeData;
+export { timeData };

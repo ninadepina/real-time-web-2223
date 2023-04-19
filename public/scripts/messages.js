@@ -1,9 +1,9 @@
-import timeData from './time.js';
+import { timeData } from './time.js';
 import { createElement, appendChild } from './ui.js';
 
 const messages = document.querySelector('.messages');
 
-export function onMessage(obj, currentUser) {
+const onMessage = (obj, currentUser) => {
 	const data = timeData();
 
 	const li = createElement('li', {});
@@ -24,14 +24,16 @@ export function onMessage(obj, currentUser) {
 
 	appendChild(messages, li);
 	window.scrollTo(0, document.body.scrollHeight);
-}
+};
 
-export function onJoin(new_user_msg) {
+const onJoin = (new_user_msg) => {
 	const li = createElement('li', { textContent: new_user_msg, classList: 'server' });
 	appendChild(messages, li);
-}
+};
 
-export function onLeave(left_user_msg) {
+const onLeave = (left_user_msg) => {
 	const li = createElement('li', { textContent: left_user_msg, classList: 'server' });
 	appendChild(messages, li);
-}
+};
+
+export { onMessage, onJoin, onLeave };
