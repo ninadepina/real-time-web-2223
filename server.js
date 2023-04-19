@@ -50,7 +50,7 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
-//socket.io
+// socket.io
 io.on('connection', (socket) => {
 	chatSocket(io, socket);
 });
