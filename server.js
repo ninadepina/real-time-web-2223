@@ -5,7 +5,7 @@ import { engine } from 'express-handlebars';
 import session from 'express-session';
 import compression from 'compression';
 import dotenv from 'dotenv';
-import { route } from './routes/routes.js';
+import routes from './routes/routes.js';
 import chatSocket from './sockets.js';
 
 dotenv.config();
@@ -33,7 +33,9 @@ app.use(
 );
 
 // routes
-app.use('/', route);
+routes.forEach((route) => {
+	app.use(route.path, route.view);
+});
 
 app.engine(
 	'hbs',
