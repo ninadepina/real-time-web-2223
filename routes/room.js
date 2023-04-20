@@ -6,13 +6,13 @@ router.get('/', (req, res) => {
 		res.redirect('/');
 		return;
 	}
-	res.render('chat', { js: ['chat'] });
+	res.render('room', { js: ['chat'] });
 });
 
 router.post('/', (req, res) => {
 	const username = req.body.username;
 	req.session.username = username;
-	res.redirect('/chat');
+	res.redirect('/room');
 });
 
 export default router;

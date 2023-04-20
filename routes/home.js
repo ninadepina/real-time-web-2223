@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
 	const postData = req.body;
 	req.session.username = postData.username;
 
-	res.redirect('/chat');
+	res.redirect('/room');
 });
 
 export default router;
