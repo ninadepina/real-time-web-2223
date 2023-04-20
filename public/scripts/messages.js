@@ -11,7 +11,7 @@ const onMessage = (obj, currentUser) => {
 
 	if (obj.sender === currentUser) obj.sender = 'You';
 	const username = createElement('h3', { textContent: `${obj.sender}` });
-	const timestamp = createElement('h4', { textContent: `${data.h}.${data.m}` });
+	const timestamp = createElement('h4', { textContent: `${data.h}:${data.m}` });
 
 	appendChild(div, username);
 	appendChild(div, timestamp);

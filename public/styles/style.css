@@ -1,4 +1,4 @@
-@import url(./chat.css);
+@import url(./room.css);
 
 *,
 *::after,
@@ -19,25 +19,27 @@
 }
 
 :root {
-	--text-color: #eaeaea;
+	--text-color: #060a1b;
+	--text-color-other: #fff;
+	--chat-bubble-text-color: #fff;
 
-	--bg-color: #1b1a1d;
-	--chat-bg-color: #2a2d2e;
+	--bg-color: #fff;
+	--chat-bg-color: #e2eaf3;
 
-	--text-placeholder-color: #96999c;
+	--text-placeholder-color: #95949b;
 	--chat-input-color: var(--bg-color);
 
 	--chat-bubble-color-other: var(--bg-color);
-	--chat-bubble-color-own: #3e3f41;
+	--chat-bubble-color-own: #1f255e;
 
-	--accent-color: #3d8dfd;
-	--accent-color-2: #d9513f;
+	--accent-color: #2f74fc;
+	--accent-color-other: #1f255e;
 
-	--font-family: 'Source Sans Pro', sans-serif;
+	--font-family: 'Manrope', sans-serif;
 	--font-weight: 300;
 
 	--border-radius: 0.875rem;
-	--border-radius-chat: 0.525rem;
+	--border-radius-chat: 0.625rem;
 }
 
 body {
@@ -110,5 +112,9 @@ button {
 	fill: none;
 }
 .username_area button svg path {
-	fill: var(--text-color);
+	fill: var(--chat-input-color);
+	transition: fill 150ms ease-in-out;
+}
+.username_area button:hover svg path {
+	fill: var(--accent-color);
 }
