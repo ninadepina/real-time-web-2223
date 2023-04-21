@@ -6,8 +6,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	const postData = req.body;
-	req.session.username = postData.username;
+	const data = req.body;
+	req.session.username = data.username;
+	// req.session.room = data.room;
 
 	res.redirect('/room');
 });
