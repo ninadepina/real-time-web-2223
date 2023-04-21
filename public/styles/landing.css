@@ -73,6 +73,9 @@
 .landing form input {
 	border: none;
 }
+.landing form input::placeholder {
+	color: var(--text-placeholder-color);
+}
 
 .landing label,
 .landing button[type='submit'] {
@@ -94,7 +97,8 @@
 	border: 2px solid var(--accent-color);
     transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
 }
-.landing button[type='submit']:hover {
+.landing button[type='submit']:hover,
+.landing button[type='submit']:focus-visible {
 	color: var(--bg-color);
 	background-color: var(--accent-color);
 }

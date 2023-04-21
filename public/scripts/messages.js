@@ -9,8 +9,9 @@ const onMessage = (obj, currentUser) => {
 	const li = createElement('li', {});
 	const div = createElement('div', {});
 
-	if (obj.sender === currentUser) obj.sender = 'You';
-	const username = createElement('h3', { textContent: `${obj.sender}` });
+	let sender = obj.sender;
+	if (obj.sender === currentUser) sender = `You (@${obj.sender})`;
+	const username = createElement('h3', { textContent: sender });
 	const timestamp = createElement('h4', { textContent: `${data.h}:${data.m}` });
 
 	appendChild(div, username);
@@ -20,7 +21,7 @@ const onMessage = (obj, currentUser) => {
 	const txt = createElement('p', { textContent: obj.message });
 	appendChild(li, txt);
 
-	obj.sender === 'You' ? li.classList.add('currentUser') : li.classList.add('otherUser');
+	obj.sender === currentUser ? li.classList.add('currentUser') : li.classList.add('otherUser');
 
 	appendChild(messages, li);
 	window.scrollTo(0, document.body.scrollHeight);
