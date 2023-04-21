@@ -1,13 +1,15 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 import { engine } from 'express-handlebars';
 import session from 'express-session';
 import compression from 'compression';
-import dotenv from 'dotenv';
+
 import routes from './routes/routes.js';
 import chatSocket from './sockets.js';
 
+import dotenv from 'dotenv';
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +20,8 @@ import { createServer } from 'http';
 const http = createServer(app);
 import { Server } from 'socket.io';
 const io = new Server(http);
+
+app.locals.fs = fs;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
@@ -31,11 +35,6 @@ app.use(
 		resave: false
 	})
 );
-
-// routes
-routes.forEach((route) => {
-	app.use(route.path, route.view);
-});
 
 app.engine(
 	'hbs',
@@ -64,6 +63,11 @@ io.use((socket, next) => {
 
 	socket.username = username;
 	next();
+});
+
+// routes
+routes.forEach((route) => {
+	app.use(route.path, route.view);
 });
 
 const port = process.env.PORT || 3000;
