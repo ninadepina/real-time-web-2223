@@ -88,14 +88,14 @@
 }
 
 .landing button[type='submit'] {
-    width: fit-content;
+	width: fit-content;
 	padding: 0.325rem 2.25rem;
 	color: var(--accent-color);
 	font-weight: 400;
 	text-align: center;
 	background-color: var(--bg-color);
 	border: 2px solid var(--accent-color);
-    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+	transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 .landing button[type='submit']:hover,
 .landing button[type='submit']:focus-visible {
@@ -104,12 +104,12 @@
 }
 
 .landing .joinRoom button[type='submit'] {
-    margin: auto 0 auto auto;
+	margin: auto 0 auto auto;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	border-right: none;
 }
 .landing .createRoom button[type='submit'] {
-    margin: auto auto auto 0;
+	margin: auto auto auto 0;
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	border-left: none;
 }
