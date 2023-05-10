@@ -1,9 +1,10 @@
+@import url(./error.css);
 @import url(./landing.css);
 @import url(./room.css);
 
 @font-face {
 	font-family: Axis;
-	src: url('/assets/Axis.otf') format('opentype');
+	src: url('/public/fonts/Axis.otf') format('opentype');
 }
 
 *,
@@ -32,14 +33,14 @@
 	--bg-color: #fff;
 	--chat-bg-color: #e2eaf3;
 
-	--text-placeholder-color: #95949b;
-	--chat-input-color: var(--bg-color);
-
 	--chat-bubble-color-other: var(--bg-color);
 	--chat-bubble-color-own: #1f255e;
 
 	--accent-color: #2f74fc;
 	--accent-color-other: #1f255e;
+
+	--text-placeholder-color: #95949b;
+	--chat-input-color: var(--bg-color);
 
 	--font-family: 'Manrope', sans-serif;
 	--font-family-2: 'Axis', sans-serif;
@@ -47,82 +48,67 @@
 
 	--border-radius: 0.875rem;
 	--border-radius-chat: 0.625rem;
+
+	--scrollbar-size: 0.75rem;
 }
 
-body {
-	min-height: 100vh;
-	font-family: var(--font-family);
-	color: var(--text-color);
-	background-color: var(--bg-color);
-	background: url('/uploads/bg.png') no-repeat center center / cover fixed;
-}
-main {
-	height: 100vh;
-}
-ul {
-	list-style: none;
-}
-button {
-	cursor: pointer;
-}
-
-.username {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+html {
+	min-height: 100%;
 	height: 100%;
 }
 
-.username_area {
-	width: 30vw;
-	padding: 0.75rem;
-	background-color: var(--chat-bg-color);
-	border-radius: var(--border-radius);
+body {
+	position: relative;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+	color: var(--text-color);
+	font-family: var(--font-family);
+	font-size: 1rem;
+	background-color: var(--bg-color);
+	background: url('/public/uploads/bg.png') no-repeat center center / cover fixed;
+	overflow: hidden;
 }
 
-.username_area form {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	padding: 0.425rem;
-	background-color: var(--chat-input-color);
-	border-radius: var(--border-radius-chat);
+main {
+	width: 100%;
+	min-height: 100%;
 }
-.username_area form input {
-	flex-grow: 1;
-	min-height: 2.775rem;
-	padding-left: 0.725rem;
-	color: var(--text-color);
-	background-color: transparent;
+
+a {
+	text-decoration: none;
+}
+button {
+	border: none;
+	cursor: pointer;
+}
+fieldset {
 	border: none;
 }
-.username_area form input::placeholder {
-	color: var(--text-placeholder-color);
+li {
+	list-style: none;
 }
-.username_area button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 2.775rem;
-	height: 2.775rem;
-	background-color: var(--accent-color);
-	border: 2px solid transparent;
-	border-radius: var(--border-radius-chat);
-	transition: background-color 150ms ease-in-out, border 150ms ease-in-out;
+
+body > * {
+	position: relative;
+	z-index: 50;
 }
-.username_area button:hover {
-	background-color: transparent;
-	border: 2px solid var(--text-color);
+
+.hide {
+	display: none;
 }
-.username_area button svg {
-	width: calc(40% + 4px);
-	height: calc(40% + 4px);
-	fill: none;
+*.hide {
+	display: none !important;
 }
-.username_area button svg path {
-	fill: var(--chat-input-color);
-	transition: fill 150ms ease-in-out;
+.hidden {
+	opacity: 0;
 }
-.username_area button:hover svg path {
-	fill: var(--accent-color);
+*.hidden {
+	opacity: 0 !important;
+}
+.hidden_text {
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
 }
