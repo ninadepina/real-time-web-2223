@@ -24,8 +24,10 @@ const io = new Server(http);
 
 app.locals.fs = fs;
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
+app.use('/public', express.static(__dirname + '/public/'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 
 app.use(
@@ -33,6 +35,7 @@ app.use(
 		name: 'chatsession',
 		secret: process.env.SESSION_SECRET,
 		saveUninitialized: true,
+		cookie: { maxAge: 604800000 },
 		resave: false
 	})
 );
@@ -48,7 +51,7 @@ app.engine(
 	})
 );
 app.set('view engine', 'hbs');
-app.set('views', './views');
+app.set('views', 'views');
 
 // socket.io
 io.on('connection', (socket) => {
@@ -77,7 +80,8 @@ routes.forEach((route) => {
 	app.use(route.path, route.view);
 });
 
-const port = process.env.PORT || 3000;
+// port
+const port = process.env.PORT || 2222;
 http.listen(port, () => {
 	console.log(`Server is running at http://localhost:${port}`);
 });

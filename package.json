@@ -1,11 +1,15 @@
 {
   "name": "real-time-web-2223",
   "version": "1.0.0",
-  "main": "server.js",
   "description": "Realtime TicTacToe",
+  "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "start:dev": "nodemon server.js"
+    "start:dev": "nodemon --inspect server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ext": "js,html,hbs"
   },
   "type": "module",
   "repository": {
@@ -27,8 +31,6 @@
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "nodemon": "^2.0.22",
-    "path": "^0.12.7",
-    "socket.io": "^4.6.1",
-    "url": "^0.11.0"
+    "socket.io": "^4.6.1"
   }
 }
