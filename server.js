@@ -7,6 +7,7 @@ import session from 'express-session';
 import compression from 'compression';
 
 import routes from './routes/routes.js';
+import helpers from './utils/helpers.js';
 import chatSocket from './sockets.js';
 
 import dotenv from 'dotenv';
@@ -42,8 +43,8 @@ app.engine(
 		layoutsDir: `${path.join(__dirname)}/views`,
 		partialsDir: `${path.join(__dirname)}/views/partials`,
 		defaultLayout: 'main',
-		extname: '.hbs'
-		// helpers: { ...helpers }
+		extname: '.hbs',
+		helpers: { ...helpers }
 	})
 );
 app.set('view engine', 'hbs');
