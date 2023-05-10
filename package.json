@@ -1,8 +1,8 @@
 {
   "name": "real-time-web-2223",
-  "description": "",
   "version": "1.0.0",
   "main": "server.js",
+  "description": "Realtime TicTacToe",
   "scripts": {
     "start": "node server.js",
     "start:dev": "nodemon server.js"
