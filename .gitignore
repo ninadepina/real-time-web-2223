@@ -9,3 +9,6 @@ node_modules
 
 # Vscode directories
 .vscode/*
+
+# Testing files
+*.html
