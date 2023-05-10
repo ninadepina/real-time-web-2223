@@ -1,0 +1,53 @@
+.error main {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem 2rem 12rem 2rem;
+	color: var(--accent-color);
+}
+
+.error main > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+.error h1 {
+	width: 40%;
+	font-family: var(--font-family-2);
+	font-size: 1.6rem;
+	text-align: center;
+}
+
+.error a {
+	position: relative;
+	display: inline-block;
+	align-self: flex-start;
+}
+.error a::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 0.7px;
+	background-color: var(--accent-color);
+	transform: scaleX(0);
+	transform-origin: bottom right;
+	transition: transform 250ms ease-out;
+}
+.error a:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.error svg {
+	width: 36%;
+	fill: none;
+}
+.error svg path {
+	fill: var(--accent-color);
+	fill-rule: evenodd;
+	clip-rule: evenodd;
+}
