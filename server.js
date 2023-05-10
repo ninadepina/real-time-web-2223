@@ -57,12 +57,18 @@ io.on('connection', (socket) => {
 
 io.use((socket, next) => {
 	const username = socket.handshake.auth.username;
+	const roomId = socket.handshake.auth.roomId;
 
 	if (!username) {
 		return next(new Error('invalid username'));
 	}
+	if (!roomId) {
+		return next(new Error('invalid roomId'));
+	}
 
 	socket.username = username;
+	socket.roomId = roomId;
+
 	next();
 });
 
