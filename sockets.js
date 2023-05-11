@@ -65,6 +65,7 @@ export default (io, socket) => {
 				currentPlayer: player,
 				cells: rooms[roomId].gameData.cells
 			});
+			if (rooms[roomId].gameData.winner) io.to(users[username].socketId).emit('GAME_OVER');
 		}
 	});
 
@@ -199,6 +200,23 @@ export default (io, socket) => {
 		}
 		io.to(room.currentPlayerSocketId).emit('SHOW_GAME_PLAYER');
 	}
+
+	socket.on('CLEAR_GAME', () => {
+		const roomId = socket.roomId;
+		const room = rooms[roomId];
+
+		room.selectedUsers = [];
+		room.currentPlayer = null;
+		room.currentPlayerSocketId = null;
+		room.gameData = {
+			x: null,
+			o: null,
+			cells: ['', '', '', '', '', '', '', '', ''],
+			winner: null
+		};
+
+		io.to(`${roomId}`).emit('GAME_CLEARED');
+	});
 
 	socket.on('disconnect', () => {
 		console.log(`${username} disconnected from socket`);

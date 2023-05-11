@@ -138,13 +138,13 @@
 	gap: 0.8rem;
 	width: 100%;
 	height: calc(100% - 7.2rem);
-	padding: 2rem;
+	padding: 3rem 2rem 2rem 2rem;
 }
 .room .quiz_area #tictactoe_bigcont::before,
 .room .quiz_area #tictactoe_bigcont::after {
 	content: '';
 	position: absolute;
-	top: 5.5rem;
+	top: 5rem;
 	display: inline-block;
 	width: 40px;
 	height: 20px;
@@ -198,6 +198,12 @@
 	color: #919597;
 	font-family: var(--font-family);
 	font-size: 0.8rem;
+}
+
+.room .quiz_area #tictactoe_clear {
+	visibility: hidden;
+	color: var(--accent-color);
+	background-color: transparent;
 }
 
 .room .quiz_area #tictactoe_info {

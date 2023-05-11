@@ -54,7 +54,7 @@ form.addEventListener('submit', function (e) {
 	}
 });
 
-const board = `<div id="tictactoe_info"><span><p id="x">player1</p><img src="/public/uploads/x2.svg" draggable="false" /></span><p>VS</p><span><img src="/public/uploads/o2.svg" draggable="false" /><p id="o">player2</p></span></div><div id="tictactoe_cont"><button data-cell-index="0" class="cell" disabled></button><button data-cell-index="1" class="cell" disabled></button><button data-cell-index="2" class="cell" disabled></button><button data-cell-index="3" class="cell" disabled></button><button data-cell-index="4" class="cell" disabled></button><button data-cell-index="5" class="cell" disabled></button><button data-cell-index="6" class="cell" disabled></button><button data-cell-index="7" class="cell" disabled></button><button data-cell-index="8" class="cell" disabled></button></div>`;
+const board = `<div id="tictactoe_info"><span><p id="x">player1</p><img src="/public/uploads/x2.svg" draggable="false" /></span><p>VS</p><span><img src="/public/uploads/o2.svg" draggable="false" /><p id="o">player2</p></span></div><div id="tictactoe_cont"><button data-cell-index="0" class="cell" disabled></button><button data-cell-index="1" class="cell" disabled></button><button data-cell-index="2" class="cell" disabled></button><button data-cell-index="3" class="cell" disabled></button><button data-cell-index="4" class="cell" disabled></button><button data-cell-index="5" class="cell" disabled></button><button data-cell-index="6" class="cell" disabled></button><button data-cell-index="7" class="cell" disabled></button><button data-cell-index="8" class="cell" disabled></button></div><button id="tictactoe_clear">clear game</button>`;
 
 const container = document.querySelector('#tictactoe_bigcont');
 const countdownEl = document.querySelector('#tictactoe_countdown');
@@ -86,6 +86,7 @@ socket.on('SHOW_GAME', () => {
 
 	setTimeout(() => {
 		countdownEl.style.display = 'none';
+		countdownEl.textContent = 3;
 		container.classList.add('x');
 		containerItem1.style.display = 'grid';
 		containerItem2.style.display = 'grid';
@@ -93,8 +94,10 @@ socket.on('SHOW_GAME', () => {
 });
 socket.on('SHOW_STARTED_GAME', (users) => {
 	button.style.display = 'none';
+	
 	container.insertAdjacentHTML('beforeend', board);
 	container.classList.add(`${users.currentPlayer}`);
+
 	document.querySelector('#x').textContent = users.x;
 	document.querySelector('#o').textContent = users.o;
 
@@ -151,6 +154,14 @@ socket.on('CELL_CLICK', (clickedCellIndex, player) => {
 socket.on('GAME_OVER', () => {
 	container.classList.remove('x');
 	container.classList.remove('o');
+
+	setTimeout(() => {
+		const clearButton = document.querySelector('#tictactoe_clear');
+		clearButton.style.visibility = 'visible';
+		clearButton.addEventListener('click', () => {
+			socket.emit('CLEAR_GAME');
+		});
+	}, 3000);
 });
 socket.on('GAME_OVER_WINNER', async (obj) => {
 	const gifUrl = await fetchGIF(obj);
@@ -159,4 +170,12 @@ socket.on('GAME_OVER_WINNER', async (obj) => {
 socket.on('GAME_OVER_LOSER', async (obj) => {
 	const gifUrl = await fetchGIF(obj);
 	onState(gifUrl);
+});
+
+socket.on('GAME_CLEARED', () => {
+	document.querySelector('#tictactoe_info').remove();
+	document.querySelector('#tictactoe_cont').remove();
+	document.querySelector('#tictactoe_clear').remove();
+
+	button.style.display = 'block';
 });
