@@ -27,7 +27,13 @@ export default (io, socket) => {
 
 	const users = rooms[roomId].users;
 
-	socket.on('JOIN_ROOM', (wasConnectedBefore) => {
+	socket.on('JOIN_ROOM', (rejoined) => {
+		if (!rejoined && Object.keys(rooms[roomId].users).length > 0 && rooms[roomId].users.hasOwnProperty(username)) {
+			socket.emit('ERROR', { type: 'username_already_exists' });
+			broadcastLeaveMsg = false;
+			return;
+		}
+
 		socket.join(`${roomId}`);
 
 		const room = io.sockets.adapter.rooms.get(roomId);
@@ -37,7 +43,9 @@ export default (io, socket) => {
 			}, 1000);
 		}
 
-		if (wasConnectedBefore) {
+		if (rejoined) {
+			const user = rooms[roomId].users[username];
+			user.socketId = socket.id;
 		} else {
 			users[username] = {
 				username: username,
@@ -49,10 +57,12 @@ export default (io, socket) => {
 
 		console.log(`${username} has joined the ${roomId} room`);
 
-		socket.broadcast.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
-			type: 'system_message',
-			message: `${username} joined the room`
-		});
+		if (!rejoined) {
+			socket.broadcast.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
+				type: 'system_message',
+				message: `${username} joined the room`
+			});
+		}
 
 		if (rooms[roomId].selectedUsers.length > 0) {
 			let player;
@@ -237,7 +247,7 @@ export default (io, socket) => {
 					type: 'system_message',
 					message: `${username} rejoined the room`
 				});
-			} else {
+			} else if (rooms[roomId].users[username].socketId == socket.id) {
 				socket.leaveAll();
 
 				if (broadcastLeaveMsg) {

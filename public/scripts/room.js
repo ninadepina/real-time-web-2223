@@ -46,6 +46,11 @@ socket.on('MESSAGE_IN_CHAT', (msg) => {
 	onMessage(msg, currentUser);
 });
 
+socket.on('ERROR', (err) => {
+	socket.disconnect(err.type);
+	window.location.href = `/?m=${err.type}`;
+});
+
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
 
