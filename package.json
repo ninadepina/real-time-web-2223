@@ -1,5 +1,5 @@
 {
-  "name": "real-time-web-2223",
+  "name": "tic-tac-toe",
   "version": "1.0.0",
   "description": "Realtime TicTacToe",
   "main": "index.js",
@@ -14,14 +14,14 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ninadepina/real-time-web-2223.git"
+    "url": "git+ssh://git@github.com/ninadepina/tic-tac-toe.git"
   },
   "author": "Nina Vens",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ninadepina/real-time-web-2223/issues"
+    "url": "https://github.com/ninadepina/tic-tac-toe/issues"
   },
-  "homepage": "https://github.com/ninadepina/real-time-web-2223#readme",
+  "homepage": "https://github.com/ninadepina/tic-tac-toe#readme",
   "dependencies": {
     "compression": "^1.7.4",
     "dotenv": "^16.0.3",

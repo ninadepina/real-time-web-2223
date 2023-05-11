@@ -10,12 +10,12 @@ Players can create or join rooms where they can chat with each other. When a roo
 ## 👩🏼‍💻 How to use
 1. Clone this repository
 ```
-$ git clone https://github.com/ninadepina/real-time-web-2223.git
+$ git clone https://github.com/ninadepina/tic-tac-toe.git
 ```
 
 2. Install dependencies
 ```
-$ cd real-time-web-2223
+$ cd tic-tac-toe
 $ npm i
 ```
 
@@ -30,7 +30,7 @@ In your browser, go to `http://localhost:2222` (you can change the localhost POR
 ---
 
 ## 📝 Documentation
-Gain a better understanding and delve further into this project by reading the [process documentation](https://github.com/ninadepina/real-time-web-2223/blob/main/docs/productdoc.md).
+Gain a better understanding and delve further into this project by reading the [process documentation](https://github.com/ninadepina/tic-tac-toe/blob/main/docs/productdoc.md).
 
 ---
 
@@ -40,4 +40,4 @@ Gain a better understanding and delve further into this project by reading the [
 ---
 
 ## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/ninadepina/real-time-web-2223/blob/main/LICENSE) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ninadepina/tic-tac-toe/blob/main/LICENSE) file for more details.
