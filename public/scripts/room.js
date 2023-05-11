@@ -124,6 +124,9 @@ function startCountdown() {
 socket.on('SHOW_GAME_PLAYER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.removeAttribute('disabled'));
 });
+socket.on('REMOVE_GAME_PLAYER', () => {
+	document.querySelectorAll('.cell').forEach((cell) => cell.setAttribute('disabled', ''));
+});
 
 socket.on('SELECTED_USERS', (users) => {
 	document.querySelector('#x').textContent = users.x;
