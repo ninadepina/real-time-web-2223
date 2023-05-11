@@ -111,9 +111,11 @@ socket.on('SHOW_STARTED_GAME', (users) => {
 
 socket.on('SHOW_GAME_PLAYER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.removeAttribute('disabled'));
+	document.querySelector('#tictactoe_cont').classList.add('border');
 });
 socket.on('REMOVE_GAME_PLAYER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.setAttribute('disabled', ''));
+	document.querySelector('#tictactoe_cont').classList.remove('border');
 });
 
 socket.on('SELECTED_USERS', (users) => {
