@@ -203,7 +203,7 @@ export default (io, socket) => {
 		io.to(room.currentPlayerSocketId).emit('SHOW_GAME_PLAYER');
 	}
 
-	socket.on('disconnect', (reason) => {
+	socket.on('disconnect', () => {
 		console.log(`${username} disconnected from socket`);
 
 		const room = io.sockets.adapter.rooms.get(roomId);
