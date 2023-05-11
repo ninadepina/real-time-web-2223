@@ -44,7 +44,7 @@ class RoomController {
 
 		fs.writeFile('./data/rooms.json', JSON.stringify({ rooms: currentRooms }), (err) => {
 			if (err) throw err;
-			console.log('Room code deleted from file!');
+			console.log('Room code deleted from file');
 		});
 	};
 

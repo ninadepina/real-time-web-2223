@@ -5,6 +5,10 @@ import { fetchGIF } from './gif.js';
 const form = document.querySelector('.chat_form');
 const input = document.querySelector('.chat_input');
 const button = document.querySelector('#tictactoe_start');
+const container = document.querySelector('#tictactoe_bigcont');
+const countdownEl = document.querySelector('#tictactoe_countdown');
+
+const board = `<div id="tictactoe_info"><span><p id="x">player1</p><img src="/public/uploads/x2.svg" draggable="false" /></span><p>VS</p><span><img src="/public/uploads/o2.svg" draggable="false" /><p id="o">player2</p></span></div><div id="tictactoe_cont"><button data-cell-index="0" class="cell" disabled></button><button data-cell-index="1" class="cell" disabled></button><button data-cell-index="2" class="cell" disabled></button><button data-cell-index="3" class="cell" disabled></button><button data-cell-index="4" class="cell" disabled></button><button data-cell-index="5" class="cell" disabled></button><button data-cell-index="6" class="cell" disabled></button><button data-cell-index="7" class="cell" disabled></button><button data-cell-index="8" class="cell" disabled></button></div><button id="tictactoe_clear">clear game</button>`;
 
 let currentUser;
 let currentRoom;
@@ -53,11 +57,6 @@ form.addEventListener('submit', function (e) {
 		input.value = '';
 	}
 });
-
-const board = `<div id="tictactoe_info"><span><p id="x">player1</p><img src="/public/uploads/x2.svg" draggable="false" /></span><p>VS</p><span><img src="/public/uploads/o2.svg" draggable="false" /><p id="o">player2</p></span></div><div id="tictactoe_cont"><button data-cell-index="0" class="cell" disabled></button><button data-cell-index="1" class="cell" disabled></button><button data-cell-index="2" class="cell" disabled></button><button data-cell-index="3" class="cell" disabled></button><button data-cell-index="4" class="cell" disabled></button><button data-cell-index="5" class="cell" disabled></button><button data-cell-index="6" class="cell" disabled></button><button data-cell-index="7" class="cell" disabled></button><button data-cell-index="8" class="cell" disabled></button></div><button id="tictactoe_clear">clear game</button>`;
-
-const container = document.querySelector('#tictactoe_bigcont');
-const countdownEl = document.querySelector('#tictactoe_countdown');
 
 socket.on('SHOW_BUTTON_GAME', () => {
 	button.removeAttribute('disabled');
@@ -109,17 +108,6 @@ socket.on('SHOW_STARTED_GAME', (users) => {
 		}
 	});
 });
-
-function startCountdown() {
-	let count = 3;
-
-	const countdownInterval = setInterval(() => {
-		count--;
-		countdownEl.textContent = count;
-
-		if (count <= 0) clearInterval(countdownInterval);
-	}, 1000);
-}
 
 socket.on('SHOW_GAME_PLAYER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.removeAttribute('disabled'));
@@ -181,3 +169,14 @@ socket.on('GAME_CLEARED', () => {
 
 	button.style.display = 'block';
 });
+
+function startCountdown() {
+	let count = 3;
+
+	const countdownInterval = setInterval(() => {
+		count--;
+		countdownEl.textContent = count;
+
+		if (count <= 0) clearInterval(countdownInterval);
+	}, 1000);
+}

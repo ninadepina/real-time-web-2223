@@ -47,7 +47,7 @@ export default (io, socket) => {
 
 		socket.emit('LOADER');
 
-		console.log(`${username} has joined the ${roomId} room!`);
+		console.log(`${username} has joined the ${roomId} room`);
 
 		socket.broadcast.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 			type: 'system_message',
@@ -257,8 +257,6 @@ export default (io, socket) => {
 				if (usernamesInRoom.length === 0) {
 					delete rooms[roomId];
 					roomController.deleteRoomFromJson(roomId);
-					console.log('deleted room');
-				} else {
 				}
 			}
 		}, 2000);
