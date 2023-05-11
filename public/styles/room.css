@@ -48,10 +48,10 @@
 	position: absolute;
 	top: 50%;
 	left: 2rem;
-	transform: translateY(-50%);
-	color: var(--text-color-other);
 	font-weight: 900;
 	text-transform: uppercase;
+	color: var(--text-color-other);
+	transform: translateY(-50%);
 	user-select: none;
 }
 .room .quiz_area .logo a[href='/leave'] span {
@@ -96,9 +96,9 @@
 	border-radius: 0 0 var(--border-radius-chat) var(--border-radius-chat);
 }
 .room .quiz_area .roomId h2 {
-	color: var(--text-color-other);
 	font-size: 1.2rem;
 	text-transform: uppercase;
+	color: var(--text-color-other);
 }
 .room .quiz_area .roomId h2 span {
 	position: relative;
@@ -116,12 +116,12 @@
 	width: fit-content;
 	padding: 0 6px;
 	font-size: 0.75rem;
-	color: var(--text-color-other);
-	background-color: var(--accent-color-other);
 	text-align: center;
 	white-space: nowrap;
+	color: var(--text-color-other);
+	background-color: var(--accent-color-other);
 	border-radius: 0 0 4px 4px;
-	z-index: 99;
+	z-index: 97;
 }
 .room .quiz_area .roomId h2 span:hover,
 .room .quiz_area .roomId h2 span:focus-visible {
@@ -195,9 +195,9 @@
 	position: absolute;
 	bottom: -2.6rem;
 	left: -0.1rem;
-	color: #919597;
 	font-family: var(--font-family);
 	font-size: 0.8rem;
+	color: #919597;
 }
 
 .room .quiz_area #tictactoe_clear {
