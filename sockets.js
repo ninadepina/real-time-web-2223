@@ -149,10 +149,7 @@ export default (io, socket) => {
 		if (currentPlayerWon) {
 			room.gameData.winner = room.currentPlayer;
 			io.to(roomId).emit('GAME_OVER');
-			io.to(room.currentPlayerSocketId).emit('GAME_OVER_WINNER', {
-				type: 'chat_message_state',
-				state: 'winner'
-			});
+			io.to(room.currentPlayerSocketId).emit('GAME_OVER_WINNER', 'winner');
 
 			let otherPlayer;
 			room.currentPlayerSocketId = room.selectedUsers[0].socketId

@@ -35,7 +35,7 @@ Gain a better understanding and delve further into this project by reading the [
 ---
 
 ## 👁️ Demo
-[rw-ninadepina.adaptable.app](https://rw-ninadepina.adaptable.app)
+[tictactoe-ninadepina.up.railway.app](https://tictactoe-ninadepina.up.railway.app/)
 
 ---
 

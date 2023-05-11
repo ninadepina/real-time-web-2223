@@ -148,7 +148,7 @@ socket.on('CELL_CLICK', (clickedCellIndex, player) => {
 	handleCellPlayed(clickedCell, clickedCellIndex, player);
 });
 
-socket.on('GAME_OVER', async () => {
+socket.on('GAME_OVER', () => {
 	container.classList.remove('x');
 	container.classList.remove('o');
 });
