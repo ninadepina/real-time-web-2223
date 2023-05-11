@@ -21,7 +21,7 @@ fetch(`/user/${ESI}`)
 		currentUser = username;
 		currentRoom = roomId;
 
-		console.log(result);
+		// console.log(result);
 
 		socket.auth = { username: username, roomId: roomId };
 		socket.connect();
@@ -94,7 +94,7 @@ socket.on('SHOW_GAME', () => {
 });
 socket.on('SHOW_STARTED_GAME', (users) => {
 	button.style.display = 'none';
-	
+
 	container.insertAdjacentHTML('beforeend', board);
 	container.classList.add(`${users.currentPlayer}`);
 
@@ -135,7 +135,6 @@ function handleCellPlayed(clickedCell, clickedCellIndex, player) {
 }
 
 function handleCellClick(clickedCellEvent) {
-	console.log('handleCellClick');
 	const clickedCell = clickedCellEvent.target;
 	const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
 

@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
 		res.redirect('/');
 		return;
 	}
-	console.log(req.session);
+
 	res.render('room', {
 		bodyClass: 'room',
 		js: ['room', 'copyOnClick', 'gif'],

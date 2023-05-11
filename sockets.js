@@ -28,8 +28,6 @@ export default (io, socket) => {
 	const users = rooms[roomId].users;
 
 	socket.on('JOIN_ROOM', (wasConnectedBefore) => {
-		console.log(`${JSON.stringify(rooms[roomId].users)} [users from room]`);
-
 		socket.join(`${roomId}`);
 
 		const room = io.sockets.adapter.rooms.get(roomId);
@@ -49,7 +47,7 @@ export default (io, socket) => {
 
 		socket.emit('LOADER');
 
-		console.log(`${username} has joined the ${roomId} chat!`);
+		console.log(`${username} has joined the ${roomId} room!`);
 
 		socket.broadcast.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 			type: 'system_message',
@@ -230,7 +228,7 @@ export default (io, socket) => {
 
 		setTimeout(() => {
 			if (roomController.getConnectionState() && username) {
-				console.log(`${username} RECONNECTED!!!!`);
+				console.log(`${username} has rejoined the room`);
 				socket.broadcast.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 					type: 'system_message',
 					message: `${username} rejoined the room`

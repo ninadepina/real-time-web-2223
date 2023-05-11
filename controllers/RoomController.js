@@ -49,7 +49,6 @@ class RoomController {
 	};
 
 	listRoomUsers = (roomObject) => {
-		console.log(roomObject);
 		if (!roomObject || typeof roomObject !== 'object') return [];
 
 		const usernamesInRoom = Object.keys(roomObject).map((key) => {
