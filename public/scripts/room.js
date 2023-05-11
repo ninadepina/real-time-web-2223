@@ -4,6 +4,7 @@ import { fetchGIF } from './gif.js';
 
 const form = document.querySelector('.chat_form');
 const input = document.querySelector('.chat_input');
+const typingMsg = document.querySelector('#typing');
 const button = document.querySelector('#tictactoe_start');
 const container = document.querySelector('#tictactoe_bigcont');
 const countdownEl = document.querySelector('#tictactoe_countdown');
@@ -61,6 +62,25 @@ form.addEventListener('submit', function (e) {
 		});
 		input.value = '';
 	}
+});
+
+input.addEventListener('keydown', (e) => {
+	if (e.key !== 'Enter' && input.value.length > 0) {
+		socket.emit('START_TYPING');
+		setTimeout(() => {
+			socket.emit('STOP_TYPING');
+		}, 2000);
+	} else {
+		socket.emit('STOP_TYPING');
+	}
+});
+
+socket.on('START_TYPING', (user) => {
+	if (user === currentUser) return;
+	typingMsg.textContent = `${user} is typing...`;
+});
+socket.on('STOP_TYPING', () => {
+	typingMsg.textContent = '';
 });
 
 socket.on('SHOW_BUTTON_GAME', () => {

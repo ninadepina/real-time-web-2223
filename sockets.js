@@ -87,6 +87,13 @@ export default (io, socket) => {
 		});
 	});
 
+	socket.on('START_TYPING', () => {
+		io.to(`${roomId}`).emit('START_TYPING', username);
+	});
+	socket.on('STOP_TYPING', () => {
+		io.to(`${roomId}`).emit('STOP_TYPING');
+	});
+
 	socket.on('RANDOM_PLAYERS_SELECTION', () => {
 		const room = io.sockets.adapter.rooms.get(roomId);
 		if (room.size >= 2) {

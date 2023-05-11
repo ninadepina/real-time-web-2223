@@ -314,12 +314,21 @@
 
 /* chat area */
 .room .chat_area {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
 	height: 45.4rem;
 	padding: 1.25rem calc(1.25rem - var(--scrollbar-size) - 0.75rem) 1.25rem 1.25rem;
 	background-color: var(--chat-bg-color);
+}
+
+.room .chat_area #typing {
+	position: absolute;
+	bottom: 5.5rem;
+	left: 2.4rem;
+	font-size: 0.725rem;
+	color: var(--accent-color-other);
 }
 
 .room .chat_area .tictactoe_start {
