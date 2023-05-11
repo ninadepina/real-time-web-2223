@@ -3,6 +3,8 @@ const roomController = new RoomController();
 const rooms = {};
 
 export default (io, socket) => {
+	roomController.setConnectionState(true);
+
 	const username = socket.username;
 	const roomId = socket.roomId;
 
@@ -210,14 +212,13 @@ export default (io, socket) => {
 		}
 
 		roomController.setConnectionState(false);
-		console.log(`${JSON.stringify(rooms[roomId].users)} [users from room]`);
-		setTimeout(() => {
-			if (roomController.getConnectionState() && rooms[roomId].users[username]) {
-				console.log(`${rooms[roomId].users[username]} RECONNECTED!!!!`);
 
+		setTimeout(() => {
+			if (roomController.getConnectionState() && username) {
+				console.log(`${username} RECONNECTED!!!!`);
 				socket.broadcast.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 					type: 'system_message',
-					message: `${rooms[roomId].users[username]} reconnected`
+					message: `${username} rejoined the room`
 				});
 			} else {
 				socket.leaveAll();
