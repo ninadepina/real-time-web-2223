@@ -421,6 +421,17 @@
 	height: 1.4rem;
 }
 
+.room .chat_area ul li.server_game_state {
+	width: 100%;
+	max-width: none;
+	padding: 0;
+}
+.room .chat_area ul li.server_game_state img {
+	max-width: 22.526875rem;
+	border-radius: var(--border-radius-chat);
+	user-select: none;
+}
+
 .room .chat_area ul li div {
 	display: flex;
 	justify-content: space-between;

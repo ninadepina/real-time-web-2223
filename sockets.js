@@ -38,7 +38,6 @@ export default (io, socket) => {
 		}
 
 		if (wasConnectedBefore) {
-
 		} else {
 			users[username] = {
 				username: username,
@@ -148,6 +147,17 @@ export default (io, socket) => {
 		if (currentPlayerWon) {
 			room.gameData.winner = room.currentPlayer;
 			io.to(roomId).emit('GAME_OVER');
+			io.to(room.currentPlayerSocketId).emit('GAME_OVER_WINNER', {
+				type: 'chat_message_state',
+				state: 'winner'
+			});
+
+			let otherPlayer;
+			room.currentPlayerSocketId = room.selectedUsers[0].socketId
+				? (otherPlayer = room.selectedUsers[1].socketId)
+				: (otherPlayer = room.selectedUsers[0].socketId);
+			io.to(otherPlayer).emit('GAME_OVER_LOSER', 'loser');
+
 			io.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 				type: 'system_message_result',
 				message: `${room.gameData.winner}`
@@ -231,7 +241,6 @@ export default (io, socket) => {
 					roomController.deleteRoomFromJson(roomId);
 					console.log('deleted room');
 				} else {
-					
 				}
 			}
 		}, 2000);

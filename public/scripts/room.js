@@ -1,5 +1,6 @@
 import socket from './socket.js';
-import { onMessage } from './msgManager.js';
+import { onMessage, onState } from './msgManager.js';
+import { fetchGIF } from './gif.js';
 
 const form = document.querySelector('.chat_form');
 const input = document.querySelector('.chat_input');
@@ -154,7 +155,15 @@ socket.on('CELL_CLICK', (clickedCellIndex, player) => {
 	handleCellPlayed(clickedCell, clickedCellIndex, player);
 });
 
-socket.on('SHOW_GAME_PLAYER', () => {
+socket.on('GAME_OVER', async () => {
 	container.classList.remove('x');
 	container.classList.remove('o');
+});
+socket.on('GAME_OVER_WINNER', async (obj) => {
+	const gifUrl = await fetchGIF(obj);
+	onState(gifUrl);
+});
+socket.on('GAME_OVER_LOSER', async (obj) => {
+	const gifUrl = await fetchGIF(obj);
+	onState(gifUrl);
 });

@@ -13,7 +13,7 @@ function htmlStr(obj) {
 		return `<p>${obj.message}</p>`;
 	} else if (obj.type == 'system_message_game') {
 		const msg = obj.message.split(' VS ');
-		return `<div><span><p>${msg[0]}</p><img src='/public/uploads/x2.svg' draggable="false"/></span><p> VS </p><span><img src='/public/uploads/o2.svg' draggable="false"/><p>${msg[1]}</p></span></div>`;
+		return `<div><span><p>${msg[0]}</p><img src="/public/uploads/x2.svg" draggable="false"/></span><p> VS </p><span><img src="/public/uploads/o2.svg" draggable="false"/><p>${msg[1]}</p></span></div>`;
 	} else if (obj.type == 'system_message_result') {
 		return `<div><h2>winner: </h2><p>${obj.message}</p></div>`;
 	}
@@ -40,6 +40,14 @@ export function onMessage(obj, currentUser) {
 		msg.classList.add(obj.sender.username === currentUser ? 'currentUser' : 'otherUser');
 	}
 
+	messages.appendChild(msg).innerHTML = str;
+	messages.scrollTop = messages.scrollHeight;
+}
+
+export function onState(gifUrl) {
+	const str = `<div><img src="${gifUrl}"></div>`;
+	const msg = document.createElement('li');
+	msg.classList.add('server_game_state');
 	messages.appendChild(msg).innerHTML = str;
 	messages.scrollTop = messages.scrollHeight;
 }

@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 	console.log(req.session);
 	res.render('room', {
 		bodyClass: 'room',
-		js: ['room', 'copyOnClick'],
+		js: ['room', 'copyOnClick', 'gif'],
 		roomId: req.session.roomId,
 	});
 });
