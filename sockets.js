@@ -189,18 +189,18 @@ export default (io, socket) => {
 	}
 
 	function switchPlayerTurn(room) {
-		let otherPlayer;
+		let removePlayer;
 		if (room.currentPlayer === room.selectedUsers[0].username) {
 			room.currentPlayer = room.selectedUsers[1].username;
 			room.currentPlayerSocketId = room.selectedUsers[1].socketId;
-			otherPlayer = room.selectedUsers[0].socketId;
+			removePlayer = room.selectedUsers[0].socketId;
 		} else {
 			room.currentPlayer = room.selectedUsers[0].username;
 			room.currentPlayerSocketId = room.selectedUsers[0].socketId;
-			otherPlayer = room.selectedUsers[1].socketId;
+			removePlayer = room.selectedUsers[1].socketId;
 		}
 		io.to(room.currentPlayerSocketId).emit('SHOW_GAME_PLAYER');
-		io.to(otherPlayer).emit('REMOVE_GAME_PLAYER');
+		io.to(removePlayer).emit('REMOVE_GAME_PLAYER');
 	}
 
 	socket.on('CLEAR_GAME', () => {
