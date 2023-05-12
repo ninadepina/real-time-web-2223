@@ -12,16 +12,16 @@ Players can create or join rooms where they can chat with each other. When a roo
 
 ## 🛠️ Features
 
-| Features                 | Status             |
-| :----------------------- | :----------------- |
-| Choose username          | :white_check_mark: |
-| Create/join room         | :white_check_mark: |
-| Chat with other users    | :white_check_mark: |
-| Play Tic Tac Toe         | :white_check_mark: |
-| Switch between players   | :white_check_mark: |
-| Save game info on socket | :white_check_mark: |
-| Restart game             | :white_check_mark: |
-| Leave/delete room        | :white_check_mark: |
+| Features                 | Status |
+| :----------------------- | :----: |
+| Choose username          |   ✅   |
+| Create/join room         |   ✅   |
+| Chat with other users    |   ✅   |
+| Play Tic Tac Toe         |   ✅   |
+| Switch between players   |   ✅   |
+| Save game info on socket |   ✅   |
+| Restart game             |   ✅   |
+| Leave/delete room        |   ✅   |
 
 ---
 

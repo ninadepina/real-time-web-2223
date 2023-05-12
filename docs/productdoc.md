@@ -113,6 +113,26 @@ if (!rooms.hasOwnProperty(roomId)) {
 }
 ```
 
+I almost forgot we had to add in an api. I chose the GIPHY api to send a random winner or loser GIF to the players.
+
+```js
+export const fetchGIF = async (obj) => {
+	let state;
+	obj === 'winner' ? (state = 'winner') : (state = 'loser');
+
+	const url = `http://api.giphy.com/v1/gifs/search?q=${state}&api_key=454o81odJoh3KwZ3JkOnWu33emb4oRy8&limit=50`;
+
+	try {
+		const data = await (await fetch(url)).json();
+		const randomNumber = Math.floor(Math.random() * data.data.length);
+
+		return data.data[randomNumber].images.original.url;
+	} catch (err) {
+		console.error(err);
+	}
+};
+```
+
 The final result can be found [here](https://tictactoe-ninadepina.up.railway.app/).
 
 ### Data life cycle
@@ -127,24 +147,24 @@ Upon room join, a loader will be shown, then the room. The room will show the cu
 
 ### Real-time events
 
-| Event name           | Description                                                  | Emit   | Listen |
-| -------------------- | ------------------------------------------------------------ | ------ | ------ |
-| JOIN_ROOM            | Sends user info to the server                                | Client | Server |
-| ERROR                | Sends error message to the client                            | Server | Client |
-| LOADER               | Shows loading screen                                         | Server | Client |
-| USERS_IN_ROOM        | Sends info of all users in room to the client                | Server | Client |
-| SHOW_BUTTON_GAME     | If room.size >= 2, shows start game button                   | Server | Client |
-| HIDE_BUTTON_GAME     | If room.size < 2, hides start game button                    | Server | Client |
-| MESSAGE_IN_CHAT      | Sends message                                                | Both   | Both   |
-| START_TYPING         | Sends typing message                                         | Both   | Both   |
-| STOP_TYPING          | Removes typing message                                       | Both   | Both   |
-| SHOW_GAME            | Shows game board                                             | Server | Client |
-| SHOW_GAME_PLAYER     | Allows current player to interact with game board            | Server | Client |
-| REMOVE_GAME_PLAYER   | Removes ability to interact with game board                  | Server | Client |
-| SHOW_STARTED_GAME    | Shows game board with saved data (for users that join later) | Server | Client |
-| SELECTED_USERS       | Sends selected users to the client                           | Server | Client |
-| CELL_CLICK           | Sends cell index to the server                               | Client | Server |
-| GAME_OVER            | Disables game board and show clear game button               | Server | Client |
-| GAME_OVER_WINNER     | Sends winner/loser GIF to players                            | Server | Client |
-| USERS_IN_ROOM_DELETE | Sends updated users in room to the client                    | Server | Client |
-| CLEAR_GAME           | Clears game board                                            | Server | Client |
+| Event name             | Description                                                  | Emit   | Listen |
+| ---------------------- | ------------------------------------------------------------ | ------ | ------ |
+| `JOIN_ROOM`            | Sends user info to the server                                | Client | Server |
+| `ERROR`                | Sends error message to the client                            | Server | Client |
+| `LOADER`               | Shows loading screen                                         | Server | Client |
+| `USERS_IN_ROOM`        | Sends info of all users in room to the client                | Server | Client |
+| `SHOW_BUTTON_GAME`     | If room.size >= 2, shows start game button                   | Server | Client |
+| `HIDE_BUTTON_GAME`     | If room.size < 2, hides start game button                    | Server | Client |
+| `MESSAGE_IN_CHAT`      | Sends message                                                | Both   | Both   |
+| `START_TYPING`         | Sends typing message                                         | Both   | Both   |
+| `STOP_TYPING`          | Removes typing message                                       | Both   | Both   |
+| `SHOW_GAME`            | Shows game board                                             | Server | Client |
+| `SHOW_GAME_PLAYER`     | Allows current player to interact with game board            | Server | Client |
+| `REMOVE_GAME_PLAYER`   | Removes ability to interact with game board                  | Server | Client |
+| `SHOW_STARTED_GAME`    | Shows game board with saved data (for users that join later) | Server | Client |
+| `SELECTED_USERS`       | Sends selected users to the client                           | Server | Client |
+| `CELL_CLICK`           | Sends cell index to the server                               | Client | Server |
+| `GAME_OVER`            | Disables game board and show clear game button               | Server | Client |
+| `GAME_OVER_WINNER`     | Sends winner/loser GIF to players                            | Server | Client |
+| `USERS_IN_ROOM_DELETE` | Sends updated users in room to the client                    | Server | Client |
+| `CLEAR_GAME`           | Clears game board                                            | Server | Client |
