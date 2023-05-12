@@ -76,6 +76,10 @@ socket.on('MESSAGE_IN_CHAT', (msg) => {
 	onMessage(msg, currentUser);
 });
 
+socket.on('KEEP_MESSAGE_IN_CHAT', (msg) => {
+	input.value = msg;
+});
+
 // error handling
 socket.on('ERROR', (err) => {
 	socket.disconnect(err.type);

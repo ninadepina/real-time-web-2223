@@ -83,11 +83,20 @@ export default (io, socket) => {
 	});
 
 	socket.on('CHAT_MESSAGE', (obj) => {
-		if (obj.message.startsWith('/msg ')) {
+		if (obj.message.startsWith('/msg')) {
 			const [, receiver, ...msgArr] = obj.message.split(' ');
 			const privateMsg = msgArr.join(' ');
 
+			if (!receiver) {
+				socket.emit('KEEP_MESSAGE_IN_CHAT', obj.message);
+				return socket.emit('MESSAGE_IN_CHAT', {
+					type: 'private_message_err',
+					message: '/msg error: Use format /msg [username] [message]'
+				});
+			}
+
 			if (!rooms[roomId].users.hasOwnProperty(receiver)) {
+				socket.emit('KEEP_MESSAGE_IN_CHAT', obj.message);
 				return socket.emit('MESSAGE_IN_CHAT', {
 					type: 'private_message_err',
 					message: '/msg error: Cannot find a user with that username'
@@ -95,6 +104,7 @@ export default (io, socket) => {
 			}
 
 			if (receiver === obj.sender) {
+				socket.emit('KEEP_MESSAGE_IN_CHAT', obj.message);
 				return socket.emit('MESSAGE_IN_CHAT', {
 					type: 'private_message_err',
 					message: '/msg error: Cannot send a private message to yourself'
@@ -102,6 +112,7 @@ export default (io, socket) => {
 			}
 
 			if (!privateMsg.length) {
+				socket.emit('KEEP_MESSAGE_IN_CHAT', obj.message);
 				return socket.emit('MESSAGE_IN_CHAT', {
 					type: 'private_message_err',
 					message: '/msg error: Cannot send an empty message'
