@@ -168,11 +168,11 @@ export default (io, socket) => {
 			io.to(roomId).emit('GAME_OVER');
 			io.to(room.currentPlayerSocketId).emit('GAME_OVER_WINNER', 'winner');
 
-			let otherPlayer;
+			let loser;
 			room.currentPlayerSocketId = room.selectedUsers[0].socketId
-				? (otherPlayer = room.selectedUsers[1].socketId)
-				: (otherPlayer = room.selectedUsers[0].socketId);
-			io.to(otherPlayer).emit('GAME_OVER_LOSER', 'loser');
+				? (loser = room.selectedUsers[1].socketId)
+				: (loser = room.selectedUsers[0].socketId);
+			io.to(loser).emit('GAME_OVER_LOSER', 'loser');
 
 			io.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 				type: 'system_message_result',
@@ -255,7 +255,7 @@ export default (io, socket) => {
 					type: 'system_message',
 					message: `${username} rejoined the room`
 				});
-			} else if (rooms[roomId].users[username].socketId == socket.id) {
+			} else if (rooms[roomId].users[username] && rooms[roomId].users[username].socketId == socket.id) {
 				socket.leaveAll();
 
 				if (broadcastLeaveMsg) {
