@@ -199,6 +199,8 @@ socket.on('CELL_CLICK', (clickedCellIndex, player) => {
 });
 
 socket.on('GAME_OVER', () => {
+	document.querySelectorAll('.cell').forEach((cell) => cell.setAttribute('disabled', ''));
+	
 	container.classList.remove('x');
 	container.classList.remove('o');
 

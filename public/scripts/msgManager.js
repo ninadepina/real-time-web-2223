@@ -15,6 +15,7 @@ function htmlStr(obj) {
 		const msg = obj.message.split(' VS ');
 		return `<div><span><p>${msg[0]}</p><img src="/public/uploads/x2.svg" draggable="false"/></span><p> VS </p><span><img src="/public/uploads/o2.svg" draggable="false"/><p>${msg[1]}</p></span></div>`;
 	} else if (obj.type == 'system_message_result') {
+		if (obj.message == 'DRAW') return `<div><h2>draw</h2></div>`;
 		return `<div><h2>winner: </h2><p>${obj.message}</p></div>`;
 	}
 	return `<p>${obj.message}</p>`;

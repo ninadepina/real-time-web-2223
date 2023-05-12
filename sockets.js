@@ -163,6 +163,8 @@ export default (io, socket) => {
 		io.to(roomId).emit('CELL_CLICK', clickedCellIndex, player);
 
 		const currentPlayerWon = checkWinningCondition(room.gameData.cells, room.currentPlayer);
+		const isBoardFull = room.gameData.cells.every((cell) => cell !== '');
+
 		if (currentPlayerWon) {
 			room.gameData.winner = room.currentPlayer;
 			io.to(roomId).emit('GAME_OVER');
@@ -177,6 +179,12 @@ export default (io, socket) => {
 			io.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 				type: 'system_message_result',
 				message: `${room.gameData.winner}`
+			});
+		} else if (isBoardFull) {
+			io.to(roomId).emit('GAME_OVER');
+			io.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
+				type: 'system_message_result',
+				message: 'DRAW'
 			});
 		} else {
 			switchPlayerTurn(room);
