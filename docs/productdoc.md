@@ -88,14 +88,63 @@ I would like my Real-Time application to have the following features:
 ![design landing page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/33cf9b82-1179-47b0-bf8e-7a2d79e4a719)
 ![design room page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/5e61beb8-61ff-434d-9196-0a7123e4cde8)
 
-## Data life cycle
 ---
 
+## Week 3
+
+After having trouble with implementing the rooms, I didn't know if I could finish the rest of the project in one week. But when trying to implement other features, I started to understand socket.io more and more.
+
+When creating the tictactoe game I encountered some problems. One of which was that when a user joined the room when there was already a game going on, the user would not be able to see the game. I fixed this by saving different variables in the server.
+
+```js
+if (!rooms.hasOwnProperty(roomId)) {
+	rooms[roomId] = {
+		users: {},
+		selectedUsers: [],
+		currentPlayer: null,
+		currentPlayerSocketId: null,
+		gameData: {
+			x: null,
+			o: null,
+			cells: ['', '', '', '', '', '', '', '', ''],
+			winner: null
+		}
+	};
+}
+```
+
+The final result can be found [here](https://tictactoe-ninadepina.up.railway.app/).
+
+### Data life cycle
 
 > A data life cycle refers to (a visual representation of) the different stages involved in the transfer of data over a network socket.
 
 The life cycle of this application starts at the homescreen, where users have the option to either create a new room or join an existing one. This user data is exchanged between the client and server through a fetch to `/user/:esi`. When trying to join a room with a username that's already present in the room, the server will send back an error message.
 
 Upon room join, a loader will be shown, then the room. The room will show the current players in the room, the chat and the start game button. When the room contains 2 or more users, the start button can be clicked and 2 players from the chat will randomly get selected. These 2 players will be able to play a game of Tic Tac Toe. The other users will be able to spectate the game. When the game is over, everyone will be able to clear the game and start a new one.
+
 ![datalifecycle](https://github.com/ninadepina/tic-tac-toe/assets/89778503/3070fd8a-8f73-409d-9a81-65ad77796724)
 
+### Real-time events
+
+| Event name           | Description                                                  | Emit   | Listen |
+| -------------------- | ------------------------------------------------------------ | ------ | ------ |
+| JOIN_ROOM            | Sends user info to the server                                | Client | Server |
+| ERROR                | Sends error message to the client                            | Server | Client |
+| LOADER               | Shows loading screen                                         | Server | Client |
+| USERS_IN_ROOM        | Sends info of all users in room to the client                | Server | Client |
+| SHOW_BUTTON_GAME     | If room.size >= 2, shows start game button                   | Server | Client |
+| HIDE_BUTTON_GAME     | If room.size < 2, hides start game button                    | Server | Client |
+| MESSAGE_IN_CHAT      | Sends message                                                | Both   | Both   |
+| START_TYPING         | Sends typing message                                         | Both   | Both   |
+| STOP_TYPING          | Removes typing message                                       | Both   | Both   |
+| SHOW_GAME            | Shows game board                                             | Server | Client |
+| SHOW_GAME_PLAYER     | Allows current player to interact with game board            | Server | Client |
+| REMOVE_GAME_PLAYER   | Removes ability to interact with game board                  | Server | Client |
+| SHOW_STARTED_GAME    | Shows game board with saved data (for users that join later) | Server | Client |
+| SELECTED_USERS       | Sends selected users to the client                           | Server | Client |
+| CELL_CLICK           | Sends cell index to the server                               | Client | Server |
+| GAME_OVER            | Disables game board and show clear game button               | Server | Client |
+| GAME_OVER_WINNER     | Sends winner/loser GIF to players                            | Server | Client |
+| USERS_IN_ROOM_DELETE | Sends updated users in room to the client                    | Server | Client |
+| CLEAR_GAME           | Clears game board                                            | Server | Client |
