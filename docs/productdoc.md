@@ -10,6 +10,56 @@ During the [Real-Time Web](https://github.com/cmda-minor-web/real-time-web-2223)
 -   _handle multi-user support._
 
 ## Concept
+---
+
+## Week 1
+
+I've never really worked with socket.io before. I did do a project containing socket.io but I was responsible for login/signing up (with passport.js). This project will be the first project implementing sockets from scratch. I'm excited to learn more about it.
+
+I started with a basic setup of the server and client. A user can enter a username and then chat with other users.
+
+```js
+// server side
+io.on('connection', (socket) => {
+	console.log('user connected');
+
+	socket.on('disconnect', () => {
+		console.log('user disconnected');
+	});
+
+	socket.on('CHAT_MESSAGE', (msg) => {
+		io.emit('chat message', msg);
+	});
+});
+```
+
+```js
+// client side
+const socket = io();
+
+const messages = document.querySelector('ul');
+const form = document.querySelector('form');
+const input = document.querySelector('input');
+
+form.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	if (input.value) {
+		socket.emit('CHAT_MESSAGE', input.value);
+		input.value = '';
+	}
+});
+
+socket.on('CHAT_MESSAGE', (msg) => {
+	const li = document.createElement('li');
+	li.textContent = msg;
+	messages.appendChild(li);
+});
+```
+
+I found this to be fairly easy (I clearly didn't know what was coming yet..).
+
+---
 
 I would like my Real-Time application to have the following features:
 
