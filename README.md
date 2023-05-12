@@ -9,6 +9,21 @@ Players can create or join rooms where they can chat with each other. When a roo
 
 ---
 
+## 🛠️ Features
+
+| Features                 | Status             |
+| :----------------------- | :----------------- |
+| Choose username          | :white_check_mark: |
+| Create/join room         | :white_check_mark: |
+| Chat with other users    | :white_check_mark: |
+| Play Tic Tac Toe         | :white_check_mark: |
+| Switch between players   | :white_check_mark: |
+| Save game info on socket | :white_check_mark: |
+| Restart game             | :white_check_mark: |
+| Leave/delete room        | :white_check_mark: |
+
+---
+
 ## 👩🏼‍💻 How to use
 1. Clone this repository
 ```
