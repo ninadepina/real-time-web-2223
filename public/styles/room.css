@@ -406,7 +406,8 @@
 	font-size: 0.725rem;
 	color: var(--chat-bubble-color-own);
 }
-.room .chat_area ul li.server_game_result div {
+.room .chat_area ul li.server_game_result div,
+.room .chat_area ul li.server_game_pussy div {
 	justify-content: center !important;
 }
 .room .chat_area ul li.server_game_result h2 {
@@ -415,6 +416,7 @@
 	font-size: 1rem;
 	text-decoration: uppercase;
 }
+.room .chat_area ul li.server_game_pussy,
 .room .chat_area ul li.server_game_result,
 .room .chat_area ul li.server_game {
 	align-self: center;
@@ -451,7 +453,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.room .chat_area ul li.server_game img {
+.room .chat_area ul li.server_game img,
+.room .chat_area ul li.server_game_pussy img {
 	width: 1.4rem;
 	height: 1.4rem;
 }

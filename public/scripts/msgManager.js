@@ -17,6 +17,8 @@ function htmlStr(obj) {
 	} else if (obj.type == 'system_message_result') {
 		if (obj.message == 'DRAW') return `<div><h2>draw</h2></div>`;
 		return `<div><h2>winner: </h2><p>${obj.message}</p></div>`;
+	} else if (obj.type == 'system_message_pussy') {
+		return `<div><img src="/public/uploads/${obj.player}2.svg" draggable="false"/><p>${obj.message}</p></div>`;
 	}
 	return `<p>${obj.message}</p>`;
 }
@@ -31,6 +33,8 @@ export function onMessage(obj, currentUser) {
 		msg.classList.add('server_game');
 	} else if (obj.type == 'system_message_result') {
 		msg.classList.add('server_game_result');
+	} else if (obj.type == 'system_message_pussy') {
+		msg.classList.add('server_game_pussy');
 	} else if (obj.type == 'chat_message') {
 		msg.id = obj.sender.username;
 

@@ -283,6 +283,22 @@ export default (io, socket) => {
 					left: username
 				});
 
+				for (let i = 0; i < rooms[roomId].selectedUsers.length; i++) {
+					if (rooms[roomId].selectedUsers[i].username === username) {
+						let whichPlayer;
+						rooms[roomId].gameData.x === username ? (whichPlayer = 'x') : (whichPlayer = 'o');
+
+						io.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
+							type: 'system_message_pussy',
+							message: `${username} got a little scared :(`,
+							player: whichPlayer
+						});
+						io.to(roomId).emit('GAME_OVER');
+
+						break;
+					}
+				}
+
 				const usernamesInRoom = roomController.listRoomUsers(rooms[roomId].users);
 
 				if (usernamesInRoom.length === 0) {
