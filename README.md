@@ -4,7 +4,8 @@
 'TIC TAC TOE' is a real-time web application built with Node.js and Socket.IO! 
 
 Players can create or join rooms where they can chat with each other. When a room has two players, a game of Tic Tac Toe can be started (if a room has more players, two players will be randomly selected). 
-![game of tictactoe in chat room](https://github.com/ninadepina/tic-tac-toe/assets/89778503/cd8cab8e-a9f1-4dd9-8fa4-3ab54813493f)
+![design landing page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/33cf9b82-1179-47b0-bf8e-7a2d79e4a719)
+![design room page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/5e61beb8-61ff-434d-9196-0a7123e4cde8)
 
 ---
 
