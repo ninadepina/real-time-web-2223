@@ -9,7 +9,6 @@ During the [Real-Time Web](https://github.com/cmda-minor-web/real-time-web-2223)
 -   _handle real-rime data management;_
 -   _handle multi-user support._
 
-## Concept
 ---
 
 ## Week 1
@@ -61,6 +60,14 @@ I found this to be fairly easy (I clearly didn't know what was coming yet..).
 
 ---
 
+## Week 2
+
+I started this week by brainstorming about what I wanted to build. I eventually came up with the idea of a Tic Tac Toe game. I also wanted to implement rooms, and a chat feature in those rooms, so users could chat with each other while playing the game.
+
+I found it quite difficult to implement rooms. I had to do a lot of research to get it working. It took the whole week, but I eventually got it working ;)!
+
+### Concept
+
 I would like my Real-Time application to have the following features:
 
 -   Users must be able to choose their own username
@@ -68,6 +75,7 @@ I would like my Real-Time application to have the following features:
 -   Users must be able to join a room
 -   Users must be able to chat with other users
 -   Users must be able to play a game of Tic Tac Toe
+
     -   System must be able to only allow Tic Tac Toe to be played when there are min. two players in a room
     -   System must be able to randomly select two players from a room
     -   Users must be able to see the game board and the current player (even if they join the game later)
@@ -75,11 +83,14 @@ I would like my Real-Time application to have the following features:
     -   Users must be able to see who won the game
     -   Users must be able to restart the game
 
-### Design
+#### Design
+
 ![design landing page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/33cf9b82-1179-47b0-bf8e-7a2d79e4a719)
 ![design room page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/5e61beb8-61ff-434d-9196-0a7123e4cde8)
 
 ## Data life cycle
+---
+
 
 > A data life cycle refers to (a visual representation of) the different stages involved in the transfer of data over a network socket.
 
