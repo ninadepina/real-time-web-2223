@@ -30,7 +30,6 @@
 
 .landing .join_create_room button {
 	position: relative;
-
 	flex-basis: 50%;
 	margin-top: 1.65rem;
 	padding: 1rem 0;
@@ -42,6 +41,7 @@
 	background-color: var(--bg-color);
 	border: 2px solid var(--accent-color);
 	transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
+	user-select: none;
 }
 .landing .join_create_room button:before,
 .landing .join_create_room button:after {
@@ -127,6 +127,9 @@
 .landing form input::placeholder {
 	color: var(--text-placeholder-color);
 }
+.landing form input::selection {
+	background-color: var(--chat-bg-color);
+}
 
 .landing label,
 .landing .submit_join_create_room button {
@@ -137,6 +140,10 @@
 	color: var(--accent-color);
 	font-family: var(--font-family-2);
 	white-space: nowrap;
+}
+.landing label::selection {
+	color: var(--text-color-other);
+	background-color: var(--accent-color);
 }
 
 .landing .submit_join_create_room button {
@@ -149,6 +156,7 @@
 	background-color: var(--bg-color);
 	border: 2px solid var(--accent-color);
 	transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+	user-select: none;
 }
 .landing .submit_join_create_room button:hover,
 .landing .submit_join_create_room button:focus-visible {
@@ -191,6 +199,7 @@
 
 .landing main > section:last-of-type img {
 	width: 100%;
+	user-select: none;
 }
 .landing main > section:last-of-type img#splash1 {
 	display: block;

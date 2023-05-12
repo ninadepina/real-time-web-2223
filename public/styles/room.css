@@ -411,7 +411,10 @@
 	margin-left: 0.3rem;
 }
 
-
+.room .chat_area ul li.server p::selection,
+.room .chat_area ul li.private_message_err p::selection {
+	background-color: var(--chat-bubble-color-other);
+}
 .room .chat_area ul li.private_message_err,
 .room .chat_area ul li.server {
 	align-self: center;
