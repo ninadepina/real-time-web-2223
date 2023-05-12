@@ -1,6 +1,13 @@
 # 'TIC TAC TOE' - Documentation
 During the [Real-Time Web](https://github.com/cmda-minor-web/real-time-web-2223) course, we were asked to build a real-time application.
 
+**Goals of this course:**
+
+-   _deal with real-time complexity;_
+-   _handle real-time client-server interaction;_
+-   _handle real-rime data management;_
+-   _handle multi-user support._
+
 ## Concept
 I would like my Real-Time application to have the following features:
 - Users must be able to choose their own username
