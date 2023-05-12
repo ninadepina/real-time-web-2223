@@ -83,6 +83,36 @@ socket.on('STOP_TYPING', () => {
 	typingMsg.textContent = '';
 });
 
+socket.on('USERS_IN_ROOM', (users) => {
+	document.querySelector('.container_users span').innerHTML = Object.keys(users).length;
+
+	const ul = document.querySelector('.user_dropdown ul');
+	const usernames = ul.querySelectorAll('li');
+	usernames.forEach((username) => username.remove());
+
+	for (const key in users) {
+		if (users.hasOwnProperty(key)) {
+			const user = users[key];
+			const li = document.createElement('li');
+			li.innerText = user.username;
+			ul.appendChild(li);
+		}
+	}
+});
+socket.on('USERS_IN_ROOM_DELETE', (users) => {
+	document.querySelector('.container_users span').innerHTML = Object.keys(users.stay).length;
+
+	const ul = document.querySelector('.user_dropdown ul');
+	const usernames = ul.querySelectorAll('li');
+
+	for (let i = 0; i < usernames.length; i++) {
+		if (users.left === usernames[i].textContent) {
+			usernames[i].remove();
+			break;
+		}
+	}
+});
+
 socket.on('SHOW_BUTTON_GAME', () => {
 	button.removeAttribute('disabled');
 });

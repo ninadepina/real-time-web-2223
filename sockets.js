@@ -52,6 +52,7 @@ export default (io, socket) => {
 				socketId: socket.id
 			};
 		}
+		io.to(`${roomId}`).emit('USERS_IN_ROOM', rooms[roomId].users);
 
 		socket.emit('LOADER');
 
@@ -268,6 +269,11 @@ export default (io, socket) => {
 					}
 				}
 				delete rooms[roomId].users[username];
+
+				io.to(`${roomId}`).emit('USERS_IN_ROOM_DELETE', {
+					stay: rooms[roomId].users,
+					left: username
+				});
 
 				const usernamesInRoom = roomController.listRoomUsers(rooms[roomId].users);
 
