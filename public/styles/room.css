@@ -353,11 +353,6 @@
 	color: var(--accent-color-other);
 }
 
-.room .chat_area .tictactoe_start {
-	position: fixed;
-	top: 0;
-}
-
 .room .chat_area ul {
 	display: flex;
 	flex-direction: column;
