@@ -34,25 +34,7 @@ fetch(`/user/${ESI}`)
 		socket.emit('JOIN_ROOM', result.connected);
 	});
 
-socket.on('LOADER', (username) => {
-	setTimeout(() => {
-		const loaderEl = document.querySelector('.loading');
-		const mainEl = document.querySelector('.main_room');
-		loaderEl.classList.add('hide');
-		mainEl.classList.remove('hide');
-	}, 1000);
-});
-
-socket.on('MESSAGE_IN_CHAT', (msg) => {
-	onMessage(msg, currentUser);
-});
-
-socket.on('ERROR', (err) => {
-	socket.disconnect(err.type);
-	window.location.href = `/?m=${err.type}`;
-});
-
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', (e) => {
 	e.preventDefault();
 
 	if (input.value) {
@@ -75,14 +57,42 @@ input.addEventListener('keydown', (e) => {
 	}
 });
 
+button.addEventListener('click', () => {
+	socket.emit('RANDOM_PLAYERS_SELECTION');
+});
+
+// loader (before entering room)
+socket.on('LOADER', () => {
+	setTimeout(() => {
+		const loaderEl = document.querySelector('.loading');
+		const mainEl = document.querySelector('.main_room');
+		loaderEl.classList.add('hide');
+		mainEl.classList.remove('hide');
+	}, 1000);
+});
+
+// chat message
+socket.on('MESSAGE_IN_CHAT', (msg) => {
+	onMessage(msg, currentUser);
+});
+
+// error handling
+socket.on('ERROR', (err) => {
+	socket.disconnect(err.type);
+	window.location.href = `/?m=${err.type}`;
+});
+
+// typing indication
 socket.on('START_TYPING', (user) => {
 	if (user === currentUser) return;
 	typingMsg.textContent = `${user} is typing...`;
 });
+
 socket.on('STOP_TYPING', () => {
 	typingMsg.textContent = '';
 });
 
+// update users in room
 socket.on('USERS_IN_ROOM', (users) => {
 	document.querySelector('.container_users span').innerHTML = Object.keys(users).length;
 
@@ -99,6 +109,7 @@ socket.on('USERS_IN_ROOM', (users) => {
 		}
 	}
 });
+
 socket.on('USERS_IN_ROOM_DELETE', (users) => {
 	document.querySelector('.container_users span').innerHTML = Object.keys(users.stay).length;
 
@@ -113,17 +124,16 @@ socket.on('USERS_IN_ROOM_DELETE', (users) => {
 	}
 });
 
+// visibility of 'START GAME' button
 socket.on('SHOW_BUTTON_GAME', () => {
 	button.removeAttribute('disabled');
 });
+
 socket.on('HIDE_BUTTON_GAME', () => {
 	button.setAttribute('disabled', '');
 });
 
-button.addEventListener('click', () => {
-	socket.emit('RANDOM_PLAYERS_SELECTION');
-});
-
+// start game
 socket.on('SHOW_GAME', () => {
 	button.style.display = 'none';
 
@@ -146,6 +156,8 @@ socket.on('SHOW_GAME', () => {
 		containerItem2.style.display = 'grid';
 	}, 3000);
 });
+
+// show already started game
 socket.on('SHOW_STARTED_GAME', (users) => {
 	button.style.display = 'none';
 
@@ -164,31 +176,24 @@ socket.on('SHOW_STARTED_GAME', (users) => {
 	});
 });
 
+// switch between players
 socket.on('SHOW_GAME_PLAYER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.removeAttribute('disabled'));
 	document.querySelector('#tictactoe_cont').classList.add('border');
 });
+
 socket.on('REMOVE_GAME_PLAYER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.setAttribute('disabled', ''));
 	document.querySelector('#tictactoe_cont').classList.remove('border');
 });
 
+// random players selection
 socket.on('SELECTED_USERS', (users) => {
 	document.querySelector('#x').textContent = users.x;
 	document.querySelector('#o').textContent = users.o;
 });
 
-function handleCellPlayed(clickedCell, clickedCellIndex, player) {
-	clickedCell.innerHTML = `<img src="/public/uploads/${player}.svg" draggable="false" />`;
-}
-
-function handleCellClick(clickedCellEvent) {
-	const clickedCell = clickedCellEvent.target;
-	const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
-
-	socket.emit('CELL_CLICK', clickedCellIndex);
-}
-
+//playing game
 socket.on('CELL_CLICK', (clickedCellIndex, player) => {
 	container.classList.add(player === 'x' ? 'o' : 'x');
 	container.classList.remove(player === 'x' ? 'x' : 'o');
@@ -198,9 +203,12 @@ socket.on('CELL_CLICK', (clickedCellIndex, player) => {
 	handleCellPlayed(clickedCell, clickedCellIndex, player);
 });
 
+// finished game
 socket.on('GAME_OVER', () => {
 	document.querySelectorAll('.cell').forEach((cell) => cell.setAttribute('disabled', ''));
-	
+
+	document.querySelector('#tictactoe_cont').classList.remove('border');
+
 	container.classList.remove('x');
 	container.classList.remove('o');
 
@@ -212,15 +220,18 @@ socket.on('GAME_OVER', () => {
 		});
 	}, 3000);
 });
+
 socket.on('GAME_OVER_WINNER', async (obj) => {
 	const gifUrl = await fetchGIF(obj);
 	onState(gifUrl);
 });
+
 socket.on('GAME_OVER_LOSER', async (obj) => {
 	const gifUrl = await fetchGIF(obj);
 	onState(gifUrl);
 });
 
+// clear game
 socket.on('GAME_CLEARED', () => {
 	document.querySelector('#tictactoe_info').remove();
 	document.querySelector('#tictactoe_cont').remove();
@@ -228,6 +239,18 @@ socket.on('GAME_CLEARED', () => {
 
 	button.style.display = 'block';
 });
+
+// functions for game
+function handleCellPlayed(clickedCell, clickedCellIndex, player) {
+	clickedCell.innerHTML = `<img src="/public/uploads/${player}.svg" draggable="false" />`;
+}
+
+function handleCellClick(clickedCellEvent) {
+	const clickedCell = clickedCellEvent.target;
+	const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+
+	socket.emit('CELL_CLICK', clickedCellIndex);
+}
 
 function startCountdown() {
 	let count = 3;
