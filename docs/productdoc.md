@@ -26,6 +26,8 @@ I would like my Real-Time application to have the following features:
     -   Users must be able to restart the game
 
 ### Design
+![design landing page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/33cf9b82-1179-47b0-bf8e-7a2d79e4a719)
+![design room page](https://github.com/ninadepina/tic-tac-toe/assets/89778503/5e61beb8-61ff-434d-9196-0a7123e4cde8)
 
 ## Data life cycle
 
@@ -34,4 +36,5 @@ I would like my Real-Time application to have the following features:
 The life cycle of this application starts at the homescreen, where users have the option to either create a new room or join an existing one. This user data is exchanged between the client and server through a fetch to `/user/:esi`. When trying to join a room with a username that's already present in the room, the server will send back an error message.
 
 Upon room join, a loader will be shown, then the room. The room will show the current players in the room, the chat and the start game button. When the room contains 2 or more users, the start button can be clicked and 2 players from the chat will randomly get selected. These 2 players will be able to play a game of Tic Tac Toe. The other users will be able to spectate the game. When the game is over, everyone will be able to clear the game and start a new one.
+![datalifecycle](https://github.com/ninadepina/tic-tac-toe/assets/89778503/3070fd8a-8f73-409d-9a81-65ad77796724)
 
