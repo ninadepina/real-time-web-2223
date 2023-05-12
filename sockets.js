@@ -284,7 +284,7 @@ export default (io, socket) => {
 				});
 
 				for (let i = 0; i < rooms[roomId].selectedUsers.length; i++) {
-					if (rooms[roomId].selectedUsers[i].username === username) {
+					if (rooms[roomId].selectedUsers[i].username === username && !rooms[roomId].gameData.winner) {
 						let whichPlayer;
 						rooms[roomId].gameData.x === username ? (whichPlayer = 'x') : (whichPlayer = 'o');
 
