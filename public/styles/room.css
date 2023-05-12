@@ -384,12 +384,14 @@
 	padding: 0.8rem;
 	overflow-wrap: break-word;
 }
+.room .chat_area ul li.private_message:has(.currentUser),
 .room .chat_area ul li.currentUser {
 	align-self: flex-end;
 	color: var(--chat-bubble-text-color);
 	background-color: var(--chat-bubble-color-own);
 	border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);
 }
+.room .chat_area ul li.private_message:has(.otherUser),
 .room .chat_area ul li.otherUser {
 	align-self: flex-start;
 	color: var(--text-color);
@@ -399,12 +401,28 @@
 .room .chat_area ul li.double {
 	margin-top: 0 !important;
 }
+
+.room .chat_area ul li.private_message div {
+	display: flex;
+	align-items: center;
+	gap: 0.425rem;
+}
+.room .chat_area ul li.private_message div h4 {
+	margin-left: 0.3rem;
+}
+
+
+.room .chat_area ul li.private_message_err,
 .room .chat_area ul li.server {
 	align-self: center;
 	margin: 0;
 	padding: 0;
 	font-size: 0.725rem;
 	color: var(--chat-bubble-color-own);
+}
+.room .chat_area ul li.private_message_err p {
+	font-size: 0.725rem !important;
+	color: red;
 }
 .room .chat_area ul li.server_game_result div,
 .room .chat_area ul li.server_game_pussy div {
@@ -470,7 +488,7 @@
 	user-select: none;
 }
 
-.room .chat_area ul li div {
+.room .chat_area ul li:not(.private_message) div {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

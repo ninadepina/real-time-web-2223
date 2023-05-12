@@ -55,6 +55,10 @@ export default (io, socket) => {
 		io.to(`${roomId}`).emit('USERS_IN_ROOM', rooms[roomId].users);
 
 		socket.emit('LOADER');
+		socket.emit('MESSAGE_IN_CHAT', {
+			type: 'system_message',
+			message: 'Use /msg [username] [message] to send a private message'
+		});
 
 		console.log(`${username} has joined the ${roomId} room`);
 
@@ -79,11 +83,50 @@ export default (io, socket) => {
 	});
 
 	socket.on('CHAT_MESSAGE', (obj) => {
+		if (obj.message.startsWith('/msg ')) {
+			const [, receiver, ...msgArr] = obj.message.split(' ');
+			const privateMsg = msgArr.join(' ');
+
+			if (!rooms[roomId].users.hasOwnProperty(receiver)) {
+				return socket.emit('MESSAGE_IN_CHAT', {
+					type: 'private_message_err',
+					message: '/msg error: Cannot find a user with that username'
+				});
+			}
+
+			if (receiver === obj.sender) {
+				return socket.emit('MESSAGE_IN_CHAT', {
+					type: 'private_message_err',
+					message: '/msg error: Cannot send a private message to yourself'
+				});
+			}
+
+			if (!privateMsg.length) {
+				return socket.emit('MESSAGE_IN_CHAT', {
+					type: 'private_message_err',
+					message: '/msg error: Cannot send an empty message'
+				});
+			}
+
+			const receiverSocketId = rooms[roomId].users[receiver].socketId;
+			io.to(`${receiverSocketId}`).emit('MESSAGE_IN_CHAT', {
+				type: 'private_message',
+				sender: obj.sender,
+				receiver: 'YOU',
+				message: privateMsg
+			});
+
+			return socket.emit('MESSAGE_IN_CHAT', {
+				type: 'private_message',
+				sender: 'YOU',
+				receiver: receiver,
+				message: privateMsg
+			});
+		}
+
 		io.to(`${roomId}`).emit('MESSAGE_IN_CHAT', {
 			type: 'chat_message',
-			sender: {
-				username: obj.sender
-			},
+			sender: { username: obj.sender },
 			message: obj.message
 		});
 	});

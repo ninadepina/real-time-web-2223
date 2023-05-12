@@ -28,6 +28,14 @@ function htmlStr(obj) {
 		case 'system_message_pussy':
 			result = `<div><img src="/public/uploads/${obj.player}2.svg" draggable="false"/><p>${obj.message}</p></div>`;
 			break;
+		case 'private_message':
+			result =
+				obj.receiver === 'YOU'
+					? `<div class="otherUser"><p>from</p><h3>${obj.sender}</h3><p>to</p><h3>YOU</h3><h4>${data.h}:${data.m}</h4></div><p>${obj.message}</p>`
+					: obj.sender === 'YOU'
+					? `<div class="currentUser"><p>from</p><h3>YOU</h3><p>to</p><h3>${obj.receiver}</h3><h4>${data.h}:${data.m}</h4></div><p>${obj.message}</p>`
+					: '';
+			break;
 		default:
 			result = `<p>${obj.message}</p>`;
 			break;
@@ -51,6 +59,12 @@ export function onMessage(obj, currentUser) {
 			break;
 		case 'system_message_pussy':
 			msg.classList.add('server_game_pussy');
+			break;
+		case 'private_message':
+			msg.classList.add('private_message');
+			break;
+		case 'private_message_err':
+			msg.classList.add('private_message_err');
 			break;
 		case 'chat_message':
 			msg.id = obj.sender.username;
