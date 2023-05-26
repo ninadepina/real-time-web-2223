@@ -61,7 +61,7 @@ In your browser, go to `http://localhost:2222` (you can change the localhost POR
 
 ## 📝 Documentation
 
-Gain a better understanding and delve further into this project by reading the [process documentation](https://github.com/ninadepina/tic-tac-toe/blob/main/docs/productdoc.md).
+Gain a better understanding and delve further into this project by reading the [process documentation](https://github.com/ninadepina/tic-tac-toe/blob/main/productdoc.md).
 
 ---
 
