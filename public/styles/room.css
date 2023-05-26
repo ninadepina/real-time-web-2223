@@ -353,7 +353,7 @@
 	color: var(--accent-color-other);
 }
 
-.room .chat_area ul {
+.room .chat_area .messages {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
@@ -373,7 +373,7 @@
 	border: 3px solid var(--chat-bg-color);
 }
 
-.room .chat_area ul li {
+.room .chat_area .messages li {
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
@@ -512,6 +512,7 @@
 }
 
 .room .chat_area form {
+	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
@@ -527,6 +528,7 @@
 	color: var(--text-color);
 	background-color: transparent;
 	border: none;
+	z-index: 2;
 }
 .room .chat_area form input::placeholder {
 	color: var(--text-placeholder-color);
@@ -541,6 +543,7 @@
 	border: 2px solid transparent;
 	border-radius: var(--border-radius-chat);
 	transition: background-color 150ms ease-in-out, border 150ms ease-in-out;
+	z-index: 2;
 }
 .room .chat_area button:hover {
 	background-color: transparent;
@@ -557,6 +560,74 @@
 }
 .room .chat_area button:hover svg path {
 	fill: var(--accent-color);
+}
+
+.room .chat_area .gif_container {
+	visibility: hidden;
+	position: absolute;
+	bottom: 6rem;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 0.425rem;
+	background-color: var(--chat-input-color);
+	border-radius: var(--border-radius);
+	transform: translateY(110%);
+	transition: transform 150ms ease-in-out;
+	user-select: none;
+}
+.room .chat_area .gif_container.visible {
+	visibility: visible;
+	transform: none;
+}
+
+.room .chat_area .gif_container ul {
+	/* display: none; */
+	max-height: 400px;
+	overflow-y: scroll;
+}
+.room .chat_area .gif_container ul.visible {
+	display: block;
+}
+
+.room .chat_area .gif_container ul li:first-of-type {
+	margin-top: 1rem;
+}
+
+.room .chat_area .gif_container ul li img {
+	width: 339px;
+	transition: transform 150ms ease-in-out;
+	cursor: pointer;
+}
+.room .chat_area .gif_container ul li img:hover {
+	transform: scale(0.9);
+}
+
+.room .chat_area .gif_container .gif_search_container {
+	display: flex;
+	gap: 1rem;
+}
+.room .chat_area .gif_container .gif_search_container input {
+	border-radius: var(--border-radius-chat);
+}
+
+.room .chat_area .gifs {
+	position: absolute;
+	top: -2rem;
+	right: 0;
+	padding: 0.2rem 0.4rem;
+	font-size: 0.725rem;
+	color: var(--text-color);
+	background-color: var(--bg-color);
+	border-radius: 0.4rem;
+	transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+	user-select: none;
+	cursor: pointer;
+}
+.room .chat_area .gifs:hover {
+	color: var(--text-color-other);
+	background-color: var(--accent-color);
 }
 
 .container_users {

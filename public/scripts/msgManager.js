@@ -87,3 +87,19 @@ export function onState(gifUrl) {
 	messages.appendChild(msg).innerHTML = str;
 	messages.scrollTop = messages.scrollHeight;
 }
+
+export function onGif(obj, currentUser) {
+	const data = timeData();
+	const allMessages = messages.querySelectorAll('li');
+	const lastMsg = allMessages[allMessages.length - 1];
+	const str =
+		allMessages.length === 0 || lastMsg.id !== obj.sender.username
+			? `<div><h3>${obj.sender.username}</h3><h4>${data.h}:${data.m}</h4></div><img src="${obj.src}" />`
+			: `<img src="${obj.src}" />`;
+	const msg = document.createElement('li');
+	if (allMessages.length > 0 && lastMsg.id === obj.sender.username) msg.classList.add('double');
+	msg.classList.add(obj.sender.username === currentUser ? 'currentUser' : 'otherUser');
+
+	messages.appendChild(msg).innerHTML = str;
+	messages.scrollTop = messages.scrollHeight;
+}

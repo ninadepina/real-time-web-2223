@@ -1,5 +1,5 @@
 import socket from './socket.js';
-import { onMessage, onState } from './msgManager.js';
+import { onMessage, onState, onGif } from './msgManager.js';
 import { fetchGIF } from './gif.js';
 
 const form = document.querySelector('.chat_form');
@@ -78,6 +78,10 @@ socket.on('MESSAGE_IN_CHAT', (msg) => {
 
 socket.on('KEEP_MESSAGE_IN_CHAT', (msg) => {
 	input.value = msg;
+});
+
+socket.on('GIF_IN_CHAT', (obj) => {
+	onGif(obj, currentUser);
 });
 
 // error handling
@@ -266,3 +270,55 @@ function startCountdown() {
 		if (count <= 0) clearInterval(countdownInterval);
 	}, 1000);
 }
+
+const gifContainer = document.querySelector('.gif_container');
+const gifSearch = document.querySelector('#gif_search');
+const gifButton = document.querySelector('.gifs');
+const msgContainer = document.querySelector('.messages');
+const ul = document.querySelector('.gif_container ul');
+
+function searchGIFs() {
+	ul.innerHTML = '';
+
+	const searchTerm = document.querySelector('#gif_input').value;
+
+	fetch(`https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=454o81odJoh3KwZ3JkOnWu33emb4oRy8&limit=20`)
+		.then((response) => response.json())
+		.then((data) => {
+			data.data.forEach((gif) => {
+				const li = document.createElement('li');
+				const img = document.createElement('img');
+				img.src = gif.images.fixed_width.url;
+				img.alt = gif.title;
+				img.className = 'gif-item';
+
+				img.addEventListener('click', () => {
+					socket.emit('SEND_GIF', {
+						src: img.src,
+						sender: currentUser
+					});
+					gifContainer.classList.remove('visible');
+				});
+
+				li.appendChild(img);
+				ul.appendChild(li);
+			});
+		})
+		.catch((error) => {
+			console.log(error);
+			ul.innerHTML = 'Error fetching GIFs. Please try again.';
+		});
+}
+
+gifSearch.addEventListener('click', () => {
+	searchGIFs();
+	ul.classList.add('visible');
+});
+
+gifButton.addEventListener('click', () => {
+	gifContainer.classList.toggle('visible');
+});
+
+msgContainer.addEventListener('click', () => {
+	if (ul.classList.contains('visible')) gifContainer.classList.remove('visible');
+});

@@ -142,6 +142,13 @@ export default (io, socket) => {
 		});
 	});
 
+	socket.on('SEND_GIF', (obj) => {
+		io.to(`${roomId}`).emit('GIF_IN_CHAT', {
+			sender: { username: obj.sender },
+			src: obj.src
+		});
+	});
+
 	socket.on('START_TYPING', () => {
 		io.to(`${roomId}`).emit('START_TYPING', username);
 	});
