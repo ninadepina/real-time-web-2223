@@ -113,25 +113,8 @@ if (!rooms.hasOwnProperty(roomId)) {
 }
 ```
 
-I almost forgot we had to add in an api. I chose the GIPHY api to send a random winner or loser GIF to the players.
-
-```js
-export const fetchGIF = async (obj) => {
-	let state;
-	obj === 'winner' ? (state = 'winner') : (state = 'loser');
-
-	const url = `http://api.giphy.com/v1/gifs/search?q=${state}&api_key=454o81odJoh3KwZ3JkOnWu33emb4oRy8&limit=50`;
-
-	try {
-		const data = await (await fetch(url)).json();
-		const randomNumber = Math.floor(Math.random() * data.data.length);
-
-		return data.data[randomNumber].images.original.url;
-	} catch (err) {
-		console.error(err);
-	}
-};
-```
+### API
+One of the conditions was that an api had to be added. I chose the GIPHY api. Users can send GIFs in chat, and the app sends a random winner or loser GIF to the winner and loser.
 
 The final result can be found [here](https://tictactoe-ninadepina.up.railway.app/).
 
