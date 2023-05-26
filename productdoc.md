@@ -114,7 +114,7 @@ if (!rooms.hasOwnProperty(roomId)) {
 ```
 
 ### API
-One of the conditions was that an api had to be added. I chose the GIPHY api. Users can send GIFs in chat, and the app sends a random winner or loser GIF to the winner and loser.
+One of the conditions was that an api had to be added. I chose the [GIPHY api](https://developers.giphy.com/docs/api/). Users can send GIFs in chat, and the app sends a random winner or loser GIF to the winner and loser.
 
 The final result can be found [here](https://tictactoe-ninadepina.up.railway.app/).
 
