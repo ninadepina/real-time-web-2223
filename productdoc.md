@@ -114,6 +114,7 @@ if (!rooms.hasOwnProperty(roomId)) {
 ```
 
 ### API
+
 One of the conditions was that an api had to be added. I chose the [GIPHY api](https://developers.giphy.com/docs/api/). Users can send GIFs in chat, and the app sends a random winner or loser GIF to the winner and loser.
 
 The final result can be found [here](https://tictactoe-ninadepina.up.railway.app/).
@@ -151,3 +152,25 @@ Upon room join, a loader will be shown, then the room. The room will show the cu
 | `GAME_OVER_WINNER`     | Sends winner/loser GIF to players                            | Server | Client |
 | `USERS_IN_ROOM_DELETE` | Sends updated users in room to the client                    | Server | Client |
 | `CLEAR_GAME`           | Clears game board                                            | Server | Client |
+
+---
+
+## App Handbook: Exploring Features and Actions
+
+-   Choosing your own username
+-   Creating/joining a room
+
+**Chat**
+
+-   Sending a message
+-   Sending a private message (`/msg [username] [message]`)
+-   Sending a GIF
+-   Seeing who's typing
+
+**Tic Tac Toe**
+
+-   Starting a game (ONLY when the room has a minimum of 2 users)
+-   Playing a game (ONLY when you're selected)
+-   Restarting a game (ONLY when the game is over)
+    -   Restart option will also be displayed when a playing player leaves (a message saying this player left will also be displayed)
+-   When the game is over, the winner and loser will receive a GIF
